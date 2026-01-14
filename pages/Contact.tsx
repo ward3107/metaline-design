@@ -1,29 +1,31 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, ChevronDown } from 'lucide-react';
 import { Reveal } from '../components/Reveal';
 import { useLanguage } from '../context/LanguageContext';
 
 export const Contact: React.FC = () => {
+  const { content, language } = useLanguage();
+  
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
     email: '',
+    designType: '',
     message: ''
   });
   const [submitted, setSubmitted] = useState(false);
-  const { content, language } = useLanguage();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate form submission
     setSubmitted(true);
+    // Simulate API call
     setTimeout(() => {
         setSubmitted(false);
-        setFormData({ name: '', phone: '', email: '', message: '' });
+        setFormData({ name: '', phone: '', email: '', designType: '', message: '' });
     }, 3000);
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
   
@@ -32,76 +34,80 @@ export const Contact: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-slate-900 pb-20">
       {/* Header */}
-      <div className="bg-primary dark:bg-black text-white py-20 mb-12">
+      <div className="bg-primary dark:bg-black text-white py-12 md:py-20 mb-8 md:mb-12">
         <div className="container mx-auto px-4 text-center">
           <Reveal>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">{content.contact.title}</h1>
-            <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+            <h1 className="text-3xl md:text-5xl font-bold mb-4">{content.contact.title}</h1>
+            <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto">
               {content.contact.subtitle}
             </p>
           </Reveal>
         </div>
       </div>
 
-      <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 max-w-6xl mx-auto">
           
           {/* Contact Info */}
-          <Reveal>
-            <div className="space-y-8">
-              <div className="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-lg">
-                <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-6">{content.contact.infoTitle}</h2>
+          <div className="space-y-6 md:space-y-8">
+            <Reveal width="100%">
+              <div className="bg-white dark:bg-slate-800 p-6 md:p-8 rounded-2xl shadow-lg border border-gray-100 dark:border-slate-700">
+                <h2 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white mb-6">{content.contact.infoTitle}</h2>
                 <div className="space-y-6">
                   <div className="flex items-start">
-                    <div className={`w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center text-accent shrink-0 ${iconMargin}`}>
-                      <Phone size={24} />
+                    <div className={`w-10 h-10 md:w-12 md:h-12 bg-accent/10 rounded-full flex items-center justify-center text-accent shrink-0 ${iconMargin}`}>
+                      <Phone size={20} className="md:w-6 md:h-6" />
                     </div>
                     <div>
-                      <h3 className="font-bold text-gray-900 dark:text-white">{content.contact.phone}</h3>
+                      <h3 className="font-bold text-gray-900 dark:text-white text-sm md:text-base">{content.contact.phone}</h3>
                       <p className="text-gray-600 dark:text-gray-400 mt-1" dir="ltr">+972 3-555-5555</p>
-                      <p className="text-sm text-gray-500 mt-1">{content.contact.phoneNote}</p>
+                      <p className="text-xs text-gray-500 mt-1">{content.contact.phoneNote}</p>
                     </div>
                   </div>
                   
                   <div className="flex items-start">
-                    <div className={`w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center text-accent shrink-0 ${iconMargin}`}>
-                      <Mail size={24} />
+                    <div className={`w-10 h-10 md:w-12 md:h-12 bg-accent/10 rounded-full flex items-center justify-center text-accent shrink-0 ${iconMargin}`}>
+                      <Mail size={20} className="md:w-6 md:h-6" />
                     </div>
                     <div>
-                      <h3 className="font-bold text-gray-900 dark:text-white">{content.contact.email}</h3>
-                      <p className="text-gray-600 dark:text-gray-400 mt-1">info@anton.co.il</p>
+                      <h3 className="font-bold text-gray-900 dark:text-white text-sm md:text-base">{content.contact.email}</h3>
+                      <p className="text-gray-600 dark:text-gray-400 mt-1 text-sm md:text-base">info@anton.co.il</p>
                     </div>
                   </div>
 
                   <div className="flex items-start">
-                    <div className={`w-12 h-12 bg-accent/10 rounded-full flex items-center justify-center text-accent shrink-0 ${iconMargin}`}>
-                      <MapPin size={24} />
+                    <div className={`w-10 h-10 md:w-12 md:h-12 bg-accent/10 rounded-full flex items-center justify-center text-accent shrink-0 ${iconMargin}`}>
+                      <MapPin size={20} className="md:w-6 md:h-6" />
                     </div>
                     <div>
-                      <h3 className="font-bold text-gray-900 dark:text-white">{content.contact.address}</h3>
-                      <p className="text-gray-600 dark:text-gray-400 mt-1">{content.contact.addressVal}</p>
+                      <h3 className="font-bold text-gray-900 dark:text-white text-sm md:text-base">{content.contact.address}</h3>
+                      <p className="text-gray-600 dark:text-gray-400 mt-1 text-sm md:text-base">{content.contact.addressVal}</p>
                     </div>
                   </div>
                 </div>
               </div>
+            </Reveal>
 
-              {/* Map Placeholder */}
-              <div className="bg-gray-200 dark:bg-slate-800 rounded-2xl h-64 overflow-hidden shadow-lg relative">
+            {/* Map Placeholder */}
+            <Reveal width="100%" delay={0.1}>
+              <div className="bg-gray-200 dark:bg-slate-800 rounded-2xl h-48 md:h-64 overflow-hidden shadow-lg relative border border-gray-100 dark:border-slate-700">
                  <img src="https://picsum.photos/800/400?blur=2" alt="Map Location" className="w-full h-full object-cover grayscale opacity-50" />
                  <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="bg-white dark:bg-slate-700 px-4 py-2 rounded shadow text-gray-800 dark:text-white font-medium">{content.contact.map}</span>
+                    <span className="bg-white/90 dark:bg-slate-700/90 backdrop-blur-sm px-4 py-2 rounded-lg shadow text-gray-800 dark:text-white font-medium text-sm md:text-base">
+                      {content.contact.map}
+                    </span>
                  </div>
               </div>
-            </div>
-          </Reveal>
+            </Reveal>
+          </div>
 
           {/* Form */}
-          <Reveal delay={0.2}>
-            <div className="bg-white dark:bg-slate-800 p-8 md:p-10 rounded-2xl shadow-xl">
-              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">{content.contact.formTitle}</h2>
-              <p className="text-gray-600 dark:text-gray-400 mb-8">{content.contact.formSubtitle}</p>
+          <Reveal delay={0.2} width="100%">
+            <div className="bg-white dark:bg-slate-800 p-6 md:p-10 rounded-2xl shadow-xl border border-gray-100 dark:border-slate-700">
+              <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-2">{content.contact.formTitle}</h2>
+              <p className="text-gray-600 dark:text-gray-400 mb-6 md:mb-8 text-sm md:text-base">{content.contact.formSubtitle}</p>
               
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{content.contact.labels.name}</label>
                   <input
@@ -116,7 +122,7 @@ export const Contact: React.FC = () => {
                   />
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                   <div>
                     <label htmlFor="phone" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{content.contact.labels.phone}</label>
                     <input
@@ -145,6 +151,31 @@ export const Contact: React.FC = () => {
                   </div>
                 </div>
 
+                {/* New Design Type Dropdown */}
+                <div>
+                  <label htmlFor="designType" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{content.contact.labels.designType}</label>
+                  <div className="relative">
+                    <select
+                      id="designType"
+                      name="designType"
+                      required
+                      value={formData.designType}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-accent focus:border-accent transition-all outline-none appearance-none"
+                    >
+                      <option value="" disabled>{content.contact.labels.designPlaceholder}</option>
+                      {content.contact.designs.map((design: { id: string, label: string }) => (
+                        <option key={design.id} value={design.id}>
+                          {design.label}
+                        </option>
+                      ))}
+                    </select>
+                    <div className={`absolute inset-y-0 ${language === 'he' ? 'left-3' : 'right-3'} flex items-center pointer-events-none text-gray-400`}>
+                      <ChevronDown size={20} />
+                    </div>
+                  </div>
+                </div>
+
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{content.contact.labels.message}</label>
                   <textarea
@@ -154,7 +185,7 @@ export const Contact: React.FC = () => {
                     required
                     value={formData.message}
                     onChange={handleChange}
-                    className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-accent focus:border-accent transition-all outline-none resize-none"
+                    className="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-slate-600 bg-white dark:bg-slate-700 text-gray-900 dark:text-white focus:ring-2 focus:ring-accent focus:border-accent transition-all outline-none resize-none min-h-[100px]"
                     placeholder={content.contact.labels.messagePlaceholder}
                   ></textarea>
                 </div>

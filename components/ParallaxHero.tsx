@@ -26,7 +26,7 @@ export const ParallaxHero: React.FC<ParallaxHeroProps> = ({
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   return (
-    <div ref={ref} className="relative overflow-hidden bg-gray-900" style={{ height, minHeight: '600px' }}>
+    <div ref={ref} className="relative overflow-hidden bg-gray-900" style={{ height, minHeight: '450px' }}>
       <motion.div 
         style={{ y }}
         className="absolute inset-0 z-0"
@@ -35,6 +35,7 @@ export const ParallaxHero: React.FC<ParallaxHeroProps> = ({
           src={image} 
           alt="Background" 
           className="w-full h-full object-cover"
+          loading="eager"
         />
         <div 
           className="absolute inset-0 bg-black"
@@ -45,20 +46,20 @@ export const ParallaxHero: React.FC<ParallaxHeroProps> = ({
 
       <motion.div 
         style={{ opacity }}
-        className="relative z-10 h-full container mx-auto px-4 flex flex-col justify-center"
+        className="relative z-10 h-full container mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center"
       >
         {children}
       </motion.div>
 
       {/* Scroll Indicator */}
       <motion.div 
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/50 z-20"
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/50 z-20 hidden sm:block"
         style={{ opacity }}
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 1.5, repeat: Infinity }}
       >
-        <div className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center p-1">
-          <div className="w-1 h-2 bg-white/50 rounded-full" />
+        <div className="w-5 h-8 border-2 border-white/30 rounded-full flex justify-center p-1">
+          <div className="w-1 h-1.5 bg-white/50 rounded-full" />
         </div>
       </motion.div>
     </div>

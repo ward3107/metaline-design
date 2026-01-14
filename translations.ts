@@ -122,9 +122,20 @@ export const CONTENT = {
         phonePlaceholder: '050-0000000',
         email: 'דוא"ל',
         emailPlaceholder: 'name@example.com',
+        designType: 'סוג העיצוב המבוקש',
+        designPlaceholder: 'בחר סוג עיצוב...',
         message: 'הודעה',
         messagePlaceholder: 'ספרו לנו על הפרויקט שלכם...'
       },
+      designs: [
+        { id: 'gates', label: 'שערים חשמליים' },
+        { id: 'fences', label: 'גדרות אלומיניום' },
+        { id: 'pergolas', label: 'פרגולות הצללה' },
+        { id: 'railings', label: 'מעקות בטיחות' },
+        { id: 'cladding', label: 'חיפוי קירות' },
+        { id: 'bars', label: 'סורגים מעוצבים' },
+        { id: 'other', label: 'אחר / שירות מותאם אישית' },
+      ],
       map: 'מפה אינטראקטיבית (הדמיה)'
     },
     footer: {
@@ -313,9 +324,20 @@ export const CONTENT = {
         phonePlaceholder: '050-0000000',
         email: 'Email',
         emailPlaceholder: 'name@example.com',
+        designType: 'Desired Design Type',
+        designPlaceholder: 'Select design type...',
         message: 'Message',
         messagePlaceholder: 'Tell us about your project...'
       },
+      designs: [
+        { id: 'gates', label: 'Electric Gates' },
+        { id: 'fences', label: 'Aluminum Fences' },
+        { id: 'pergolas', label: 'Shading Pergolas' },
+        { id: 'railings', label: 'Safety Railings' },
+        { id: 'cladding', label: 'Wall Cladding' },
+        { id: 'bars', label: 'Designed Bars' },
+        { id: 'other', label: 'Other / Custom Solution' },
+      ],
       map: 'Interactive Map (Simulation)'
     },
     footer: {
