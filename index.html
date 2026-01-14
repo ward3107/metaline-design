@@ -57,6 +57,18 @@
         outline: 3px solid #eab308;
         outline-offset: 2px;
       }
+
+      /* Accessibility Overrides */
+      body.font-readable, body.font-readable * {
+        font-family: Arial, Helvetica, sans-serif !important;
+        letter-spacing: 0.05em;
+      }
+      
+      body.underline-links a {
+        text-decoration: underline !important;
+        text-decoration-thickness: 2px !important;
+        text-underline-offset: 4px;
+      }
     </style>
   <script type="importmap">
 {

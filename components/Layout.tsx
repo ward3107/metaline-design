@@ -5,6 +5,7 @@ import { ArrowUp } from 'lucide-react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { WhatsAppWidget } from './WhatsAppWidget';
 import { AccessibilityWidget } from './AccessibilityWidget';
+import { CookieConsent } from './CookieConsent';
 import { useLanguage } from '../context/LanguageContext';
 
 interface LayoutProps {
@@ -63,11 +64,12 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
       
       <WhatsAppWidget />
       <AccessibilityWidget />
+      <CookieConsent />
 
       {showTopBtn && (
         <button
           onClick={goToTop}
-          className={`fixed bottom-8 ${btnPositionClass} p-3 rounded-full bg-accent text-white shadow-lg hover:bg-accent-hover transition-all duration-300 z-50 animate-bounce`}
+          className={`fixed bottom-8 ${btnPositionClass} p-3 rounded-full bg-white text-black shadow-lg hover:scale-110 transition-all duration-300 z-50 mix-blend-difference animate-bounce`}
           aria-label="Back to top"
         >
           <ArrowUp size={24} />

@@ -26,7 +26,7 @@ export const ParallaxHero: React.FC<ParallaxHeroProps> = ({
   const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
 
   return (
-    <div ref={ref} className="relative overflow-hidden" style={{ height, minHeight: '600px' }}>
+    <div ref={ref} className="relative overflow-hidden bg-gray-900" style={{ height, minHeight: '600px' }}>
       <motion.div 
         style={{ y }}
         className="absolute inset-0 z-0"

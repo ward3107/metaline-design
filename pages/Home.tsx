@@ -16,8 +16,9 @@ export const Home: React.FC = () => {
     <div className="flex flex-col">
       {/* Parallax Hero Section */}
       <ParallaxHero 
-        image="https://picsum.photos/1920/1080?grayscale&blur=2"
+        image="https://images.unsplash.com/photo-1620626011761-996317b8d101?q=80&w=2069&auto=format&fit=crop"
         height="100vh"
+        overlayOpacity={0.6}
       >
         <div className="max-w-3xl text-white pt-20">
           <Reveal>

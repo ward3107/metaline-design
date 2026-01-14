@@ -29,6 +29,28 @@ export const CONTENT = {
       success: 'ההודעה נשלחה בהצלחה!',
       backToTop: 'חזור למעלה'
     },
+    cookies: {
+      title: 'הגדרות עוגיות',
+      text: 'אנו משתמשים בעוגיות כדי לשפר את חווית הגלישה שלך, להציג תוכן מותאם אישית ולנתח את התנועה באתר.',
+      acceptAll: 'קבל הכל',
+      rejectAll: 'דחה הכל',
+      customize: 'התאמה אישית',
+      save: 'שמור העדפות',
+      categories: {
+        essential: {
+          title: 'הכרחיות',
+          desc: 'עוגיות אלו חיוניות לתפקוד האתר ולא ניתן לבטלן.'
+        },
+        analytics: {
+          title: 'אנליטיקה',
+          desc: 'עוזרות לנו להבין כיצד מבקרים משתמשים באתר.'
+        },
+        marketing: {
+          title: 'שיווק',
+          desc: 'משמשות להצגת פרסומות רלוונטיות ומותאמות אישית.'
+        }
+      }
+    },
     home: {
       heroTitle: 'עיצוב ובטיחות',
       heroHighlight: 'ללא פשרות',
@@ -197,6 +219,28 @@ export const CONTENT = {
       sending: 'Sending...',
       success: 'Message Sent Successfully!',
       backToTop: 'Back to Top'
+    },
+    cookies: {
+      title: 'Cookie Settings',
+      text: 'We use cookies to improve your browsing experience, serve personalized content, and analyze our traffic.',
+      acceptAll: 'Accept All',
+      rejectAll: 'Reject All',
+      customize: 'Customize',
+      save: 'Save Preferences',
+      categories: {
+        essential: {
+          title: 'Essential',
+          desc: 'These cookies are necessary for the website to function and cannot be switched off.'
+        },
+        analytics: {
+          title: 'Analytics',
+          desc: 'Help us understand how visitors interact with the website.'
+        },
+        marketing: {
+          title: 'Marketing',
+          desc: 'Used to display relevant ads and personalized content.'
+        }
+      }
     },
     home: {
       heroTitle: 'Design & Safety',
