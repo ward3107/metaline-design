@@ -99,44 +99,45 @@ export const Gallery: React.FC = () => {
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6"
         >
           <AnimatePresence mode="popLayout">
-            {filteredItems.map((item) => (
-              <motion.div 
-                layout
-                key={item.id}
-                className="relative group rounded-xl overflow-hidden cursor-pointer shadow-lg aspect-[4/3] sm:aspect-square md:aspect-[4/3]"
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.3 }}
-                onClick={() => setSelectedItem(item)}
-                layoutId={`gallery-item-${item.id}`}
-              >
-                <motion.img 
-                  src={item.image} 
-                  alt={item.title} 
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  loading="lazy"
-                />
-                
-                {/* Overlay - visible on hover for desktop, simplified for mobile if needed */}
-                <div 
-                  className="absolute inset-0 bg-black/50 flex flex-col items-center justify-center text-center p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+            {filteredItems.map((item, index) => (
+              <Reveal key={item.id} width="100%" delay={0.1 + (index % 3) * 0.1}>
+                <motion.div 
+                  layout
+                  className="relative group rounded-xl overflow-hidden cursor-pointer shadow-lg aspect-[4/3] sm:aspect-square md:aspect-[4/3]"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                  onClick={() => setSelectedItem(item)}
+                  layoutId={`gallery-item-${item.id}`}
                 >
-                  <motion.div
-                    className="mb-2 md:mb-4 text-white/80"
-                    initial={{ scale: 0.5, opacity: 0 }}
-                    whileHover={{ scale: 1, opacity: 1 }}
+                  <motion.img 
+                    src={item.image} 
+                    alt={item.title} 
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                  
+                  {/* Overlay */}
+                  <div 
+                    className="absolute inset-0 bg-black/50 flex flex-col items-center justify-center text-center p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                   >
-                    <ZoomIn size={28} className="md:w-8 md:h-8" />
-                  </motion.div>
-                  <h3 className="text-white text-lg md:text-2xl font-bold mb-1 md:mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                    {item.title}
-                  </h3>
-                  <span className="text-accent text-sm md:text-base font-medium translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">
-                    {content.gallery.types[item.category as keyof typeof content.gallery.types]}
-                  </span>
-                </div>
-              </motion.div>
+                    <motion.div
+                      className="mb-2 md:mb-4 text-white/80"
+                      initial={{ scale: 0.5, opacity: 0 }}
+                      whileHover={{ scale: 1, opacity: 1 }}
+                    >
+                      <ZoomIn size={28} className="md:w-8 md:h-8" />
+                    </motion.div>
+                    <h3 className="text-white text-lg md:text-2xl font-bold mb-1 md:mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                      {item.title}
+                    </h3>
+                    <span className="text-accent text-sm md:text-base font-medium translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">
+                      {content.gallery.types[item.category as keyof typeof content.gallery.types]}
+                    </span>
+                  </div>
+                </motion.div>
+              </Reveal>
             ))}
           </AnimatePresence>
         </motion.div>

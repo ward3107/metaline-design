@@ -1,38 +1,61 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, CheckCircle2, ShieldCheck, Clock, PenTool } from 'lucide-react';
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { Reveal } from '../components/Reveal';
 import { ParallaxHero } from '../components/ParallaxHero';
 import { ParallaxSection } from '../components/ParallaxSection';
-import { ParallaxElement } from '../components/ParallaxElement';
 import { HorizontalScrollSection } from '../components/HorizontalScrollSection';
 import { useLanguage } from '../context/LanguageContext';
 
 export const Home: React.FC = () => {
   const { content, language } = useLanguage();
+  const featuresRef = useRef(null);
   const Arrow = language === 'he' ? ArrowLeft : ArrowRight;
+  
+  const isRTL = language === 'he';
+  const scrollRange: [string, string] = isRTL ? ["0%", "72%"] : ["0%", "-72%"];
+
+  const { scrollYProgress } = useScroll({
+    target: featuresRef,
+    offset: ["start start", "end end"]
+  });
+
+  // Balanced spring: fast response but still smooth
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001
+  });
+
+  const features = [
+    { icon: ShieldCheck, title: content.home.features.warranty.title, desc: content.home.features.warranty.desc },
+    { icon: PenTool, title: content.home.features.design.title, desc: content.home.features.design.desc },
+    { icon: CheckCircle2, title: content.home.features.safety.title, desc: content.home.features.safety.desc },
+    { icon: Clock, title: content.home.features.schedule.title, desc: content.home.features.schedule.desc },
+  ];
 
   return (
     <div className="flex flex-col">
-      {/* Parallax Hero Section */}
+      {/* Hero Section */}
       <ParallaxHero 
         image="https://images.unsplash.com/photo-1620626011761-996317b8d101?q=80&w=2069&auto=format&fit=crop"
         height="100vh"
         overlayOpacity={0.6}
       >
         <div className="max-w-3xl text-white pt-12 md:pt-20">
-          <Reveal>
+          <Reveal direction="right" delay={0.3}>
             <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-4 md:mb-6 leading-tight">
               {content.home.heroTitle} <span className="text-accent">{content.home.heroHighlight}</span>
             </h1>
           </Reveal>
-          <Reveal delay={0.4}>
+          <Reveal delay={0.6}>
             <p className="text-lg md:text-2xl text-gray-200 mb-8 font-light max-w-2xl">
               {content.tagline}. {content.home.heroDesc}
             </p>
           </Reveal>
-          <Reveal delay={0.6}>
-            <div className="flex flex-col sm:flex-row gap-4">
+          <Reveal delay={0.9}>
+            <div className={`flex flex-col sm:flex-row gap-4 ${isRTL ? 'sm:justify-end' : 'sm:justify-start'}`}>
               <Link 
                 to="/products" 
                 className="bg-accent hover:bg-accent-hover text-white px-8 py-4 rounded-lg font-bold text-lg transition-all flex items-center justify-center gap-2 w-full sm:w-auto"
@@ -51,129 +74,150 @@ export const Home: React.FC = () => {
         </div>
       </ParallaxHero>
 
-      {/* Horizontal Scroll Services Section - Starting at 020% to remove gap */}
+      {/* Services Section */}
       <HorizontalScrollSection 
         className="bg-gradient-to-b from-gray-50 to-primary dark:from-slate-900 dark:to-black" 
-        scrollRange={["30%", "-30%"]}
-        height="400vh"
+        scrollRange={scrollRange}
+        height="500vh"
       >
-        {/* Title Card - Adjusted for better entry space */}
-        <div className="min-w-[75vw] md:min-w-[40vw] lg:min-w-[30vw] p-4 md:p-8 flex flex-col justify-center">
-             <div className="w-16 md:w-20 h-2 bg-accent mb-6 md:mb-8"></div>
-             <h2 className="text-3xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4 md:mb-6 leading-tight">
-               {content.home.servicesTitle.split(' ').map((word, i) => (
-                  <React.Fragment key={i}>
-                    {word}<br className="hidden md:block" />
-                    <span className="md:hidden"> </span>
-                  </React.Fragment>
-               ))}
+        <div className={`min-w-[85vw] md:min-w-[40vw] py-8 flex flex-col justify-center ${isRTL ? 'pl-8' : 'pr-8'}`}>
+             <div className="w-12 md:w-20 h-2 bg-accent mb-6"></div>
+             <h2 className="text-3xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4 leading-tight">
+               {content.home.servicesTitle}
              </h2>
-             <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 leading-relaxed max-w-md">
+             <p className="text-base md:text-xl text-gray-600 dark:text-gray-300 max-w-md">
                {content.home.servicesDesc}
              </p>
-             <div className="mt-8 flex items-center gap-2 text-accent font-bold animate-pulse">
-                <Arrow />
-                <span className="text-sm md:text-base">{content.buttons.scroll}</span>
-             </div>
         </div>
 
-        {/* Service Cards */}
         {content.servicesList.map((service, index) => (
-          <div 
-            key={service.id} 
-            className="group relative h-[60vh] md:h-[65vh] min-w-[80vw] md:min-w-[45vw] lg:min-w-[30vw] bg-white dark:bg-slate-800 rounded-2xl md:rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-300 border border-gray-100 dark:border-slate-700 flex flex-col"
-          >
-            <div className="h-2/5 md:h-1/2 overflow-hidden relative">
-              <img 
-                src={service.image} 
-                alt={service.title} 
-                className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
-              />
-              <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors" />
-              <div className={`absolute top-4 ${language === 'he' ? 'right-4' : 'left-4'} md:top-6 md:${language === 'he' ? 'right-6' : 'left-6'} bg-white dark:bg-slate-700 p-3 md:p-4 rounded-xl md:rounded-2xl text-accent shadow-lg`}>
-                <service.icon size={24} className="md:w-8 md:h-8" />
+          <div key={service.id} className="group relative h-[60vh] md:h-[70vh] min-w-[85vw] md:min-w-[45vw] lg:min-w-[30vw] bg-white dark:bg-slate-800 rounded-3xl overflow-hidden shadow-xl flex flex-col border border-gray-100 dark:border-slate-700">
+            <div className="h-1/2 overflow-hidden relative">
+              <img src={service.image} alt={service.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              <div className={`absolute top-4 ${isRTL ? 'right-4' : 'left-4'} bg-white dark:bg-slate-700 p-3 rounded-2xl text-accent shadow-md`}>
+                <service.icon size={24} />
               </div>
             </div>
-            
-            <div className="p-6 md:p-8 flex flex-col flex-grow relative">
-               <span className={`absolute top-4 ${language === 'he' ? 'left-6' : 'right-6'} text-6xl md:text-8xl font-black text-gray-100 dark:text-slate-700/50 -z-0 opacity-50`}>
-                 0{index + 1}
-               </span>
-               
-               <h3 className="text-xl md:text-3xl font-bold mb-2 md:mb-4 text-gray-900 dark:text-white relative z-10">
-                 {service.title}
-               </h3>
-               <p className="text-sm md:text-lg text-gray-600 dark:text-gray-300 mb-6 md:mb-8 leading-relaxed relative z-10 line-clamp-3 md:line-clamp-4">
-                 {service.description}
-               </p>
-               
-               <div className="mt-auto relative z-10">
-                 <Link 
-                    to="/products" 
-                    className="inline-flex items-center justify-center w-full py-3 md:py-4 rounded-xl border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white font-bold hover:bg-gray-900 hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors text-sm md:text-base"
-                  >
-                    {content.buttons.learnMore}
-                  </Link>
-               </div>
+            <div className="p-6 md:p-8 flex flex-col flex-grow">
+               <h3 className="text-xl md:text-2xl font-bold mb-2 text-gray-900 dark:text-white">{service.title}</h3>
+               <p className="text-sm md:text-base text-gray-600 dark:text-gray-300 mb-6 line-clamp-3">{service.description}</p>
+               <Link to="/products" className="mt-auto inline-flex items-center justify-center py-3 rounded-xl border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white font-bold hover:bg-gray-900 hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors text-sm">
+                 {content.buttons.learnMore}
+               </Link>
             </div>
           </div>
         ))}
       </HorizontalScrollSection>
 
-      {/* Features Section */}
-      <section className="py-16 md:py-24 bg-primary dark:bg-black text-white overflow-hidden relative z-10">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
-            <ParallaxElement offset={-15}>
-              <div className="text-center p-6 border border-gray-700 rounded-xl hover:border-accent transition-colors bg-gray-800/50 backdrop-blur-sm h-full">
-                <ShieldCheck className="w-10 h-10 md:w-12 md:h-12 text-accent mx-auto mb-4" />
-                <h3 className="text-lg md:text-xl font-bold mb-2">{content.home.features.warranty.title}</h3>
-                <p className="text-sm md:text-base text-gray-400">{content.home.features.warranty.desc}</p>
-              </div>
-            </ParallaxElement>
-            
-            <ParallaxElement offset={15}>
-              <div className="text-center p-6 border border-gray-700 rounded-xl hover:border-accent transition-colors bg-gray-800/50 backdrop-blur-sm h-full">
-                <PenTool className="w-10 h-10 md:w-12 md:h-12 text-accent mx-auto mb-4" />
-                <h3 className="text-lg md:text-xl font-bold mb-2">{content.home.features.design.title}</h3>
-                <p className="text-sm md:text-base text-gray-400">{content.home.features.design.desc}</p>
-              </div>
-            </ParallaxElement>
+      {/* Optimized Fast Features Section */}
+      <section 
+        ref={featuresRef} 
+        className="relative bg-black" 
+        style={{ height: '500vh' }}
+      >
+        <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-center overflow-hidden">
+          
+          {/* Permanent Title Box - Repositioned further down for better margin */}
+          <motion.div 
+            className="absolute top-24 md:top-36 text-center z-50 w-full px-4"
+            style={{
+              opacity: useTransform(smoothProgress, [0, 0.05, 0.95, 1], [0, 1, 1, 0]),
+              y: useTransform(smoothProgress, [0, 0.05], [30, 0])
+            }}
+          >
+            <h2 className="text-4xl md:text-7xl font-bold text-white mb-4 tracking-tight drop-shadow-2xl">
+              {content.about.valuesTitle}
+            </h2>
+            <div className="w-20 md:w-32 h-1.5 bg-accent mx-auto rounded-full shadow-[0_0_20px_rgba(234,179,8,0.5)]" />
+          </motion.div>
 
-            <ParallaxElement offset={-15}>
-              <div className="text-center p-6 border border-gray-700 rounded-xl hover:border-accent transition-colors bg-gray-800/50 backdrop-blur-sm h-full">
-                <CheckCircle2 className="w-10 h-10 md:w-12 md:h-12 text-accent mx-auto mb-4" />
-                <h3 className="text-lg md:text-xl font-bold mb-2">{content.home.features.safety.title}</h3>
-                <p className="text-sm md:text-base text-gray-400">{content.home.features.safety.desc}</p>
-              </div>
-            </ParallaxElement>
+          {/* Optimized Stage - Adjusted for lower title */}
+          <div className="relative w-full max-w-5xl px-4 mt-20 md:mt-32 h-[50vh] md:h-[60vh]" style={{ perspective: '1500px' }}>
+            {features.map((feature, idx) => {
+              const chunk = 0.85 / features.length;
+              const start = 0.05 + (idx * chunk);
+              const end = start + chunk;
 
-            <ParallaxElement offset={15}>
-              <div className="text-center p-6 border border-gray-700 rounded-xl hover:border-accent transition-colors bg-gray-800/50 backdrop-blur-sm h-full">
-                <Clock className="w-10 h-10 md:w-12 md:h-12 text-accent mx-auto mb-4" />
-                <h3 className="text-lg md:text-xl font-bold mb-2">{content.home.features.schedule.title}</h3>
-                <p className="text-sm md:text-base text-gray-400">{content.home.features.schedule.desc}</p>
-              </div>
-            </ParallaxElement>
+              // Snappier transition ranges
+              const inputRanges = [
+                start - 0.08, // Coming up
+                start,        // Full Focus
+                end - 0.08,   // Still Focused
+                end           // Gone
+              ];
+
+              const opacity = useTransform(smoothProgress, inputRanges, [0, 1, 1, 0]);
+              const rotateX = useTransform(smoothProgress, inputRanges, [30, 0, 0, -30]);
+              const y = useTransform(smoothProgress, inputRanges, [100, 0, 0, -100]);
+              const scale = useTransform(smoothProgress, inputRanges, [0.95, 1, 1, 0.95]);
+
+              return (
+                <motion.div
+                  key={idx}
+                  style={{ 
+                    opacity, 
+                    rotateX, 
+                    y, 
+                    scale,
+                    zIndex: features.length - idx,
+                    willChange: 'transform, opacity'
+                  }}
+                  className="absolute inset-0 flex items-center justify-center pointer-events-none"
+                >
+                  <div className="w-full max-h-full bg-white/5 backdrop-blur-2xl border border-white/10 rounded-[2.5rem] md:rounded-[5rem] p-8 md:p-16 flex flex-col md:flex-row items-center gap-8 md:gap-16 pointer-events-auto shadow-[0_50px_100px_rgba(0,0,0,0.5)] overflow-hidden">
+                    <div className="relative shrink-0 flex items-center justify-center">
+                      <div className="absolute inset-0 bg-accent blur-3xl opacity-10" />
+                      <feature.icon size={60} className="text-accent relative z-10 md:w-44 md:h-44 drop-shadow-[0_0_30px_rgba(234,179,8,0.3)]" />
+                    </div>
+                    <div className="text-center md:text-right flex-1">
+                      <span className="text-accent/60 font-black text-lg md:text-2xl mb-2 block uppercase tracking-[0.2em]">0{idx + 1}</span>
+                      <h3 className="text-3xl md:text-8xl font-bold text-white mb-4 md:mb-6 leading-none tracking-tighter">
+                        {feature.title}
+                      </h3>
+                      <p className="text-gray-300 text-base md:text-4xl leading-tight font-light line-clamp-3 md:line-clamp-4">
+                        {feature.desc}
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
+
+          {/* Fast Progress Indicators */}
+          <div className={`absolute ${isRTL ? 'left-8 md:left-16' : 'right-8 md:right-16'} top-1/2 -translate-y-1/2 flex flex-col gap-6 z-50`}>
+            {features.map((_, i) => {
+               const chunk = 0.85 / features.length;
+               const activePoint = 0.05 + (i * chunk);
+               const isActive = useTransform(smoothProgress, [activePoint - 0.05, activePoint, activePoint + chunk], [0.2, 1, 0.2]);
+               const indicatorScale = useTransform(smoothProgress, [activePoint - 0.05, activePoint, activePoint + chunk], [1, 1.8, 1]);
+
+               return (
+                 <motion.div 
+                   key={i}
+                   style={{ opacity: isActive, scale: indicatorScale }}
+                   className="w-2 h-2 md:w-3 md:h-3 rounded-full bg-accent shadow-[0_0_10px_rgba(234,179,8,0.5)]"
+                 />
+               );
+            })}
+          </div>
+
         </div>
       </section>
 
       {/* CTA Section */}
       <ParallaxSection 
         image="https://picsum.photos/1920/800?grayscale&blur=2" 
-        className="py-20 md:py-32"
+        className="py-24 md:py-48"
         overlayOpacity={0.7}
       >
         <div className="text-center relative z-10 px-4">
           <Reveal>
-            <h2 className="text-3xl md:text-5xl font-bold text-white mb-4 md:mb-6">{content.home.ctaTitle}</h2>
-            <p className="text-lg md:text-xl text-gray-200 mb-8 md:mb-10 max-w-2xl mx-auto">
-              {content.home.ctaDesc}
-            </p>
+            <h2 className="text-4xl md:text-7xl font-bold text-white mb-8 tracking-tight">{content.home.ctaTitle}</h2>
+            <p className="text-lg md:text-3xl text-gray-200 mb-12 max-w-4xl mx-auto font-light leading-relaxed">{content.home.ctaDesc}</p>
             <Link 
               to="/contact" 
-              className="inline-block bg-accent hover:bg-accent-hover text-white px-8 md:px-12 py-4 md:py-5 rounded-lg font-bold text-lg shadow-lg transition-transform hover:scale-105 w-full sm:w-auto"
+              className="inline-block bg-accent hover:bg-accent-hover text-white px-12 md:px-20 py-6 md:py-8 rounded-3xl font-bold text-2xl shadow-[0_20px_50px_rgba(234,179,8,0.4)] transition-all hover:-translate-y-2 hover:shadow-[0_25px_60px_rgba(234,179,8,0.6)] w-full sm:w-auto"
             >
               {content.home.ctaButton}
             </Link>
