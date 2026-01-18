@@ -155,8 +155,12 @@ export interface RateLimitConfig {
 
 export const checkRateLimit = (
   identifier: string,
-  config: RateLimitConfig = { maxAttempts: 3, windowMs: 60000 }
+  config: Partial<RateLimitConfig> = {}
 ): { allowed: boolean; remainingAttempts?: number; retryAfter?: number } => {
+  const finalConfig: RateLimitConfig = {
+    maxAttempts: config.maxAttempts ?? 3,
+    windowMs: config.windowMs ?? 60000
+  };
   const now = Date.now();
   const key = `rate_limit_${identifier}`;
 
@@ -170,32 +174,32 @@ export const checkRateLimit = (
         firstAttempt: now,
       };
       localStorage.setItem(key, JSON.stringify(data));
-      return { allowed: true, remainingAttempts: config.maxAttempts - 1 };
+      return { allowed: true, remainingAttempts: finalConfig.maxAttempts - 1 };
     }
 
     const data = JSON.parse(stored);
     const timeSinceFirst = now - data.firstAttempt;
 
     // Reset if window has passed
-    if (timeSinceFirst > config.windowMs) {
+    if (timeSinceFirst > finalConfig.windowMs) {
       const newData = {
         attempts: 1,
         firstAttempt: now,
       };
       localStorage.setItem(key, JSON.stringify(newData));
-      return { allowed: true, remainingAttempts: config.maxAttempts - 1 };
+      return { allowed: true, remainingAttempts: finalConfig.maxAttempts - 1 };
     }
 
     // Check if limit exceeded
-    if (data.attempts >= config.maxAttempts) {
-      const retryAfter = Math.ceil((config.windowMs - timeSinceFirst) / 1000);
+    if (data.attempts >= finalConfig.maxAttempts) {
+      const retryAfter = Math.ceil((finalConfig.windowMs - timeSinceFirst) / 1000);
       return { allowed: false, retryAfter };
     }
 
     // Increment attempts
     data.attempts += 1;
     localStorage.setItem(key, JSON.stringify(data));
-    return { allowed: true, remainingAttempts: config.maxAttempts - data.attempts };
+    return { allowed: true, remainingAttempts: finalConfig.maxAttempts - data.attempts };
 
   } catch (error) {
     // If localStorage fails, allow submission (fail-open)

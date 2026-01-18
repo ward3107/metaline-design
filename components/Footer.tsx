@@ -38,7 +38,7 @@ export const Footer: React.FC = () => {
           <div>
             <h3 className="text-white text-lg font-bold mb-6">{content.footer.quickLinks}</h3>
             <ul className="space-y-3">
-              {content.nav.map((link) => (
+              {content.nav.map((link: { path: string; label: string }) => (
                 <li key={link.path}>
                   <Link to={link.path} className="hover:text-accent transition-colors flex items-center">
                     <span className={`w-1.5 h-1.5 bg-accent rounded-full ${language === 'he' ? 'ml-2' : 'mr-2'}`}></span>
@@ -53,7 +53,7 @@ export const Footer: React.FC = () => {
           <div>
             <h3 className="text-white text-lg font-bold mb-6">{content.footer.services}</h3>
             <ul className="space-y-3">
-              {content.servicesList.slice(0, 5).map((service) => (
+              {content.servicesList.slice(0, 5).map((service: { id: string; title: string }) => (
                 <li key={service.id}>
                   <Link to="/products" className="hover:text-accent transition-colors flex items-center">
                     <span className={`w-1.5 h-1.5 bg-gray-600 rounded-full ${language === 'he' ? 'ml-2' : 'mr-2'}`}></span>
@@ -88,19 +88,28 @@ export const Footer: React.FC = () => {
         <div className="border-t border-gray-800 mt-12 pt-8">
           <div className="flex flex-wrap justify-center gap-6 text-sm">
             <button
-              onClick={() => setModalConfig({ title: 'Terms of Service', path: '/legal/terms.md' }) || setModalOpen(true)}
+              onClick={() => {
+                setModalConfig({ title: 'Terms of Service', path: '/legal/terms.md' });
+                setModalOpen(true);
+              }}
               className="text-gray-400 hover:text-accent transition-colors"
             >
               Terms of Service
             </button>
             <button
-              onClick={() => setModalConfig({ title: 'Privacy Policy', path: '/legal/privacy.md' }) || setModalOpen(true)}
+              onClick={() => {
+                setModalConfig({ title: 'Privacy Policy', path: '/legal/privacy.md' });
+                setModalOpen(true);
+              }}
               className="text-gray-400 hover:text-accent transition-colors"
             >
               Privacy Policy
             </button>
             <button
-              onClick={() => setModalConfig({ title: 'Help & FAQ', path: '/legal/help.md' }) || setModalOpen(true)}
+              onClick={() => {
+                setModalConfig({ title: 'Help & FAQ', path: '/legal/help.md' });
+                setModalOpen(true);
+              }}
               className="text-gray-400 hover:text-accent transition-colors"
             >
               Help & FAQ

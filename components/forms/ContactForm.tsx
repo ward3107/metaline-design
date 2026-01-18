@@ -106,8 +106,8 @@ export const ContactForm: React.FC<ContactFormProps> = ({
   const handleChange = useCallback((field: keyof ContactFormData, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
 
-    // Clear error for this field when user starts typing
-    if (errors[field]) {
+    // Clear error for this field when user starts typing (excluding honeypot)
+    if (field !== 'honeypot' && errors[field as keyof Omit<FormErrors, 'general'>]) {
       setErrors(prev => ({ ...prev, [field]: undefined }));
     }
   }, [errors]);
@@ -130,7 +130,7 @@ export const ContactForm: React.FC<ContactFormProps> = ({
     e.preventDefault();
 
     // Mark all fields as touched
-    setTouched(new Set(['name', 'email', 'phone', 'message'] as unknown as keyof ContactFormData));
+    setTouched(new Set(['name', 'email', 'phone', 'message'] as Array<keyof ContactFormData>));
 
     // Validate all fields
     const validation = validateContactForm(formData);

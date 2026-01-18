@@ -64,7 +64,7 @@ export const About: React.FC = () => {
         <div className="mt-24">
           <h2 className="text-3xl font-bold text-gray-900 dark:text-white text-center mb-16">{content.about.valuesTitle}</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {content.about.values.map((val, idx) => {
+            {content.about.values.map((val: { title: string; text: string }, idx: number) => {
               const Icon = icons[idx % icons.length];
               return (
                 <Reveal key={idx} delay={idx * 0.1}>

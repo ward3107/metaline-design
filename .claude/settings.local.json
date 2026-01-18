@@ -5,7 +5,10 @@
       "Bash(npm run dev)",
       "Bash(git checkout:*)",
       "Bash(wc:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(git stash:*)",
+      "Bash(git push:*)",
+      "Bash(npm run build:*)"
     ]
   }
 }

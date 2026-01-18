@@ -90,7 +90,7 @@ export const Home: React.FC = () => {
              </p>
         </div>
 
-        {content.servicesList.map((service, index) => (
+        {content.servicesList.map((service: { id: string; title: string; description: string; image: string; icon: any }, index: number) => (
           <div key={service.id} className="group relative h-[60vh] md:h-[70vh] min-w-[85vw] md:min-w-[45vw] lg:min-w-[30vw] bg-white dark:bg-slate-800 rounded-3xl overflow-hidden shadow-xl flex flex-col border border-gray-100 dark:border-slate-700">
             <div className="h-1/2 overflow-hidden relative">
               <img src={service.image} alt={service.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />

@@ -80,7 +80,7 @@ export const Navbar: React.FC = () => {
 
           {/* Desktop Menu */}
           <div className={`hidden lg:flex items-center space-x-8 ${spaceClass}`}>
-            {content.nav.map((link) => (
+            {content.nav.map((link: { path: string; label: string }) => (
               <Link
                 key={link.path}
                 to={link.path}
@@ -140,7 +140,7 @@ export const Navbar: React.FC = () => {
             className="lg:hidden bg-white dark:bg-slate-800 border-t border-gray-100 dark:border-slate-700 shadow-xl overflow-hidden"
           >
             <div className="px-4 pt-2 pb-6 space-y-1">
-              {content.nav.map((link) => (
+              {content.nav.map((link: { path: string; label: string }) => (
                 <Link
                   key={link.path}
                   to={link.path}

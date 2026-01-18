@@ -9,7 +9,7 @@ export const Products: React.FC = () => {
 
   const filteredProducts = activeCategory === 'all' 
     ? content.productsList 
-    : content.productsList.filter(p => p.category === activeCategory);
+    : content.productsList.filter((p: { category: string }) => p.category === activeCategory);
 
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-slate-900 pb-20">
@@ -28,7 +28,7 @@ export const Products: React.FC = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Filters */}
         <div className="flex flex-wrap justify-center gap-2 mb-8 md:mb-12">
-          {content.products.categories.map((cat) => (
+          {content.products.categories.map((cat: { id: string; label: string }) => (
             <button
               key={cat.id}
               onClick={() => setActiveCategory(cat.id)}
@@ -49,7 +49,7 @@ export const Products: React.FC = () => {
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
         >
           <AnimatePresence mode="popLayout">
-            {filteredProducts.map((product) => (
+            {filteredProducts.map((product: { id: string; title: string; description: string; image: string; category: string }) => (
               <motion.div
                 layout
                 key={product.id}
@@ -72,7 +72,7 @@ export const Products: React.FC = () => {
                 </div>
                 <div className="p-5 md:p-6 flex-grow flex flex-col">
                   <span className="text-[10px] md:text-xs font-semibold text-accent uppercase tracking-wider mb-2">
-                    {content.products.categories.find(c => c.id === product.category)?.label}
+                    {content.products.categories.find((c: { id: string; label: string }) => c.id === product.category)?.label}
                   </span>
                   <h3 className="text-lg md:text-xl font-bold text-gray-900 dark:text-white mb-2">{product.title}</h3>
                   <p className="text-gray-600 dark:text-gray-400 text-sm line-clamp-2 mb-4">{product.description}</p>

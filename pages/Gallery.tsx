@@ -9,7 +9,7 @@ export const Gallery: React.FC = () => {
   const [selectedItem, setSelectedItem] = useState<typeof content.galleryList[0] | null>(null);
   const [filter, setFilter] = useState('all');
 
-  const filteredItems = content.galleryList.filter(item => 
+  const filteredItems = content.galleryList.filter((item: { id: string; title: string; image: string; category: string }) =>
     filter === 'all' || item.category === filter
   );
 
@@ -28,7 +28,7 @@ export const Gallery: React.FC = () => {
   const handleNext = useCallback((e?: React.MouseEvent) => {
     e?.stopPropagation();
     if (!selectedItem) return;
-    const currentIndex = filteredItems.findIndex(item => item.id === selectedItem.id);
+    const currentIndex = filteredItems.findIndex((item: { id: string }) => item.id === selectedItem.id);
     if (currentIndex === -1) return;
     const nextIndex = (currentIndex + 1) % filteredItems.length;
     setSelectedItem(filteredItems[nextIndex]);
@@ -37,7 +37,7 @@ export const Gallery: React.FC = () => {
   const handlePrev = useCallback((e?: React.MouseEvent) => {
     e?.stopPropagation();
     if (!selectedItem) return;
-    const currentIndex = filteredItems.findIndex(item => item.id === selectedItem.id);
+    const currentIndex = filteredItems.findIndex((item: { id: string }) => item.id === selectedItem.id);
     if (currentIndex === -1) return;
     const prevIndex = (currentIndex - 1 + filteredItems.length) % filteredItems.length;
     setSelectedItem(filteredItems[prevIndex]);
@@ -56,7 +56,7 @@ export const Gallery: React.FC = () => {
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [selectedItem, handleNext, handlePrev]);
 
-  const allLabel = content.products.categories.find(c => c.id === 'all')?.label || 'All';
+  const allLabel = content.products.categories.find((c: { id: string; label: string }) => c.id === 'all')?.label || 'All';
   
   const categories = [
     { id: 'all', label: allLabel },
@@ -99,7 +99,7 @@ export const Gallery: React.FC = () => {
           className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6"
         >
           <AnimatePresence mode="popLayout">
-            {filteredItems.map((item, index) => (
+            {filteredItems.map((item: { id: string; title: string; image: string; category: string }, index: number) => (
               <Reveal key={item.id} width="100%" delay={0.1 + (index % 3) * 0.1}>
                 <motion.div 
                   layout
