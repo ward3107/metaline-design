@@ -1,14 +1,16 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Phone, Globe } from 'lucide-react';
+import { Menu, X, Phone } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
+import { ThemeToggle } from './ThemeToggle';
+import { LanguageSwitcher } from './LanguageSwitcher';
 
 export const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
   const [scrolled, setScrolled] = useState(false);
-  const { content, language, toggleLanguage } = useLanguage();
+  const { content, language, setLanguage } = useLanguage();
   
   const menuRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -87,17 +89,16 @@ export const Navbar: React.FC = () => {
                 {link.label}
               </Link>
             ))}
-            
-            {/* Language Toggle */}
-            <button
-              onClick={toggleLanguage}
-              className={`flex items-center gap-1 font-medium transition-colors ${
-                scrolled ? 'text-gray-800 dark:text-gray-200' : 'text-white'
-              } hover:text-accent`}
-            >
-              <Globe size={18} />
-              <span>{language === 'he' ? 'EN' : 'עב'}</span>
-            </button>
+
+            {/* Language Switcher */}
+            <LanguageSwitcher
+              currentLanguage={language}
+              onLanguageChange={setLanguage}
+              scrolled={scrolled}
+            />
+
+            {/* Theme Toggle */}
+            <ThemeToggle />
 
             <a 
               href="tel:*5555" 
@@ -110,14 +111,11 @@ export const Navbar: React.FC = () => {
 
           {/* Mobile Menu Button */}
           <div className="lg:hidden flex items-center gap-4">
-            <button
-              onClick={toggleLanguage}
-              className={`flex items-center gap-1 font-medium ${
-                scrolled ? 'text-gray-900 dark:text-white' : 'text-gray-900 lg:text-white'
-              }`}
-            >
-              <span className="text-sm font-bold">{language === 'he' ? 'EN' : 'עב'}</span>
-            </button>
+            <LanguageSwitcher
+              currentLanguage={language}
+              onLanguageChange={setLanguage}
+              scrolled={scrolled}
+            />
 
             <button
               ref={buttonRef}

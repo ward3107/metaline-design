@@ -44,13 +44,13 @@ export const AccessibilityWidget: React.FC = () => {
     <>
       <motion.button
         ref={buttonRef}
-        className={`fixed bottom-24 ${positioningClasses} md:bottom-8 z-50 bg-white text-black p-4 rounded-full shadow-lg hover:scale-110 transition-transform mix-blend-difference`}
+        className={`fixed bottom-24 ${positioningClasses} md:bottom-8 z-50 bg-white text-black p-4 rounded-full shadow-lg hover:scale-110 transition-transform mix-blend-difference opacity-50 hover:opacity-100`}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
         onClick={() => setIsOpen(!isOpen)}
         aria-label="Accessibility Menu"
         initial={{ opacity: 0, scale: 0 }}
-        animate={{ opacity: 1, scale: 1 }}
+        animate={{ opacity: 0.5, scale: 1 }}
         transition={{ delay: 1.1 }}
       >
         <Accessibility size={28} className={isOpen ? 'animate-spin' : ''} />

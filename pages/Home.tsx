@@ -14,7 +14,7 @@ export const Home: React.FC = () => {
   const Arrow = language === 'he' ? ArrowLeft : ArrowRight;
   
   const isRTL = language === 'he';
-  const scrollRange: [string, string] = isRTL ? ["0%", "72%"] : ["0%", "-72%"];
+  const scrollRange: [string, string] = isRTL ? ["0%", "100%"] : ["0%", "-100%"];
 
   const { scrollYProgress } = useScroll({
     target: featuresRef,
@@ -38,19 +38,19 @@ export const Home: React.FC = () => {
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
-      <ParallaxHero 
+      <ParallaxHero
         image="https://images.unsplash.com/photo-1620626011761-996317b8d101?q=80&w=2069&auto=format&fit=crop"
         height="100vh"
         overlayOpacity={0.6}
       >
         <div className="max-w-3xl text-white pt-12 md:pt-20">
           <Reveal direction="right" delay={0.3}>
-            <h1 className="text-4xl sm:text-5xl md:text-7xl font-bold mb-4 md:mb-6 leading-tight">
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-4 md:mb-6 leading-tight">
               {content.home.heroTitle} <span className="text-accent">{content.home.heroHighlight}</span>
             </h1>
           </Reveal>
           <Reveal delay={0.6}>
-            <p className="text-lg md:text-2xl text-gray-200 mb-8 font-light max-w-2xl">
+            <p className="text-xl md:text-2xl lg:text-3xl text-gray-200 mb-8 font-light max-w-2xl">
               {content.tagline}. {content.home.heroDesc}
             </p>
           </Reveal>
@@ -82,10 +82,10 @@ export const Home: React.FC = () => {
       >
         <div className={`min-w-[85vw] md:min-w-[40vw] py-8 flex flex-col justify-center ${isRTL ? 'pl-8' : 'pr-8'}`}>
              <div className="w-12 md:w-20 h-2 bg-accent mb-6"></div>
-             <h2 className="text-3xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4 leading-tight">
+             <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white mb-4 leading-tight">
                {content.home.servicesTitle}
              </h2>
-             <p className="text-base md:text-xl text-gray-600 dark:text-gray-300 max-w-md">
+             <p className="text-lg md:text-xl lg:text-2xl text-gray-600 dark:text-gray-300 max-w-md">
                {content.home.servicesDesc}
              </p>
         </div>
@@ -99,8 +99,8 @@ export const Home: React.FC = () => {
               </div>
             </div>
             <div className="p-6 md:p-8 flex flex-col flex-grow">
-               <h3 className="text-xl md:text-2xl font-bold mb-2 text-gray-900 dark:text-white">{service.title}</h3>
-               <p className="text-sm md:text-base text-gray-600 dark:text-gray-300 mb-6 line-clamp-3">{service.description}</p>
+               <h3 className="text-2xl md:text-3xl font-bold mb-2 text-gray-900 dark:text-white">{service.title}</h3>
+               <p className="text-base md:text-lg text-gray-600 dark:text-gray-300 mb-6 line-clamp-3">{service.description}</p>
                <Link to="/products" className="mt-auto inline-flex items-center justify-center py-3 rounded-xl border-2 border-gray-900 dark:border-white text-gray-900 dark:text-white font-bold hover:bg-gray-900 hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors text-sm">
                  {content.buttons.learnMore}
                </Link>
@@ -118,38 +118,37 @@ export const Home: React.FC = () => {
         <div className="sticky top-0 h-screen w-full flex flex-col items-center justify-center overflow-hidden">
           
           {/* Permanent Title Box - Repositioned further down for better margin */}
-          <motion.div 
-            className="absolute top-24 md:top-36 text-center z-50 w-full px-4"
+          <motion.div
+            className="absolute top-28 md:top-32 text-center z-50 w-full px-4"
             style={{
               opacity: useTransform(smoothProgress, [0, 0.05, 0.95, 1], [0, 1, 1, 0]),
               y: useTransform(smoothProgress, [0, 0.05], [30, 0])
             }}
           >
-            <h2 className="text-4xl md:text-7xl font-bold text-white mb-4 tracking-tight drop-shadow-2xl">
+            <h2 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-4 tracking-tight drop-shadow-2xl">
               {content.about.valuesTitle}
             </h2>
             <div className="w-20 md:w-32 h-1.5 bg-accent mx-auto rounded-full shadow-[0_0_20px_rgba(234,179,8,0.5)]" />
           </motion.div>
 
           {/* Optimized Stage - Adjusted for lower title */}
-          <div className="relative w-full max-w-5xl px-4 mt-20 md:mt-32 h-[50vh] md:h-[60vh]" style={{ perspective: '1500px' }}>
+          <div className="relative w-full max-w-6xl px-4 mt-16 md:mt-12 h-[50vh] md:h-[60vh]" style={{ perspective: '1500px' }}>
             {features.map((feature, idx) => {
               const chunk = 0.85 / features.length;
               const start = 0.05 + (idx * chunk);
               const end = start + chunk;
 
-              // Snappier transition ranges
+              // Smooth continuous transition ranges
               const inputRanges = [
                 start - 0.08, // Coming up
                 start,        // Full Focus
-                end - 0.08,   // Still Focused
-                end           // Gone
+                end,          // Gone
               ];
 
-              const opacity = useTransform(smoothProgress, inputRanges, [0, 1, 1, 0]);
-              const rotateX = useTransform(smoothProgress, inputRanges, [30, 0, 0, -30]);
-              const y = useTransform(smoothProgress, inputRanges, [100, 0, 0, -100]);
-              const scale = useTransform(smoothProgress, inputRanges, [0.95, 1, 1, 0.95]);
+              const opacity = useTransform(smoothProgress, inputRanges, [0, 1, 0]);
+              const rotateX = useTransform(smoothProgress, inputRanges, [30, 0, -30]);
+              const y = useTransform(smoothProgress, inputRanges, [100, 0, -100]);
+              const scale = useTransform(smoothProgress, inputRanges, [0.95, 1, 0.95]);
 
               return (
                 <motion.div
@@ -164,17 +163,17 @@ export const Home: React.FC = () => {
                   }}
                   className="absolute inset-0 flex items-center justify-center pointer-events-none"
                 >
-                  <div className="w-full max-h-full bg-white/5 backdrop-blur-2xl border border-white/10 rounded-[2.5rem] md:rounded-[5rem] p-8 md:p-16 flex flex-col md:flex-row items-center gap-8 md:gap-16 pointer-events-auto shadow-[0_50px_100px_rgba(0,0,0,0.5)] overflow-hidden">
+                  <div className="w-full max-h-full bg-white/5 backdrop-blur-2xl border border-white/10 rounded-[2.5rem] md:rounded-[5rem] p-12 md:p-24 flex flex-col md:flex-row items-center gap-12 md:gap-20 pointer-events-auto shadow-[0_50px_100px_rgba(0,0,0,0.5)] overflow-hidden">
                     <div className="relative shrink-0 flex items-center justify-center">
                       <div className="absolute inset-0 bg-accent blur-3xl opacity-10" />
                       <feature.icon size={60} className="text-accent relative z-10 md:w-44 md:h-44 drop-shadow-[0_0_30px_rgba(234,179,8,0.3)]" />
                     </div>
                     <div className="text-center md:text-right flex-1">
-                      <span className="text-accent/60 font-black text-lg md:text-2xl mb-2 block uppercase tracking-[0.2em]">0{idx + 1}</span>
-                      <h3 className="text-3xl md:text-8xl font-bold text-white mb-4 md:mb-6 leading-none tracking-tighter">
+                      <span className="text-accent/60 font-black text-xl md:text-2xl lg:text-3xl mb-2 block uppercase tracking-[0.2em]">0{idx + 1}</span>
+                      <h3 className="text-3xl md:text-6xl lg:text-7xl font-bold text-white mb-4 md:mb-6 leading-none tracking-tighter">
                         {feature.title}
                       </h3>
-                      <p className="text-gray-300 text-base md:text-4xl leading-tight font-light line-clamp-3 md:line-clamp-4">
+                      <p className="text-gray-300 text-base md:text-2xl lg:text-3xl leading-tight font-light line-clamp-3 md:line-clamp-4">
                         {feature.desc}
                       </p>
                     </div>
@@ -213,11 +212,11 @@ export const Home: React.FC = () => {
       >
         <div className="text-center relative z-10 px-4">
           <Reveal>
-            <h2 className="text-4xl md:text-7xl font-bold text-white mb-8 tracking-tight">{content.home.ctaTitle}</h2>
-            <p className="text-lg md:text-3xl text-gray-200 mb-12 max-w-4xl mx-auto font-light leading-relaxed">{content.home.ctaDesc}</p>
+            <h2 className="text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-8 tracking-tight">{content.home.ctaTitle}</h2>
+            <p className="text-xl md:text-3xl lg:text-4xl text-gray-200 mb-12 max-w-4xl mx-auto font-light leading-relaxed">{content.home.ctaDesc}</p>
             <Link 
               to="/contact" 
-              className="inline-block bg-accent hover:bg-accent-hover text-white px-12 md:px-20 py-6 md:py-8 rounded-3xl font-bold text-2xl shadow-[0_20px_50px_rgba(234,179,8,0.4)] transition-all hover:-translate-y-2 hover:shadow-[0_25px_60px_rgba(234,179,8,0.6)] w-full sm:w-auto"
+              className="inline-block bg-accent hover:bg-accent-hover text-white px-8 md:px-16 lg:px-20 py-4 md:py-6 lg:py-8 rounded-3xl font-bold text-xl md:text-2xl shadow-[0_20px_50px_rgba(234,179,8,0.4)] transition-all hover:-translate-y-2 hover:shadow-[0_25px_60px_rgba(234,179,8,0.6)] w-full sm:w-auto"
             >
               {content.home.ctaButton}
             </Link>

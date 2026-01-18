@@ -60,7 +60,7 @@ export const Contact: React.FC = () => {
                     </div>
                     <div>
                       <h3 className="font-bold text-gray-900 dark:text-white text-sm md:text-base">{content.contact.phone}</h3>
-                      <p className="text-gray-600 dark:text-gray-400 mt-1" dir="ltr">+972 3-555-5555</p>
+                      <a href="tel:+97235555555" className="text-gray-600 dark:text-gray-400 mt-1 hover:text-accent dark:hover:text-accent transition-colors" dir="ltr">+972 3-555-5555</a>
                       <p className="text-xs text-gray-500 mt-1">{content.contact.phoneNote}</p>
                     </div>
                   </div>
@@ -81,22 +81,34 @@ export const Contact: React.FC = () => {
                     </div>
                     <div>
                       <h3 className="font-bold text-gray-900 dark:text-white text-sm md:text-base">{content.contact.address}</h3>
-                      <p className="text-gray-600 dark:text-gray-400 mt-1 text-sm md:text-base">{content.contact.addressVal}</p>
+                      <a
+                        href="https://ul.waze.com/ul?navigate=yes&q=HaMelacha+12+Holon+Israel"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-accent dark:text-accent mt-1 hover:text-accent-hover dark:hover:text-accent-hover transition-colors text-sm md:text-base block underline underline-offset-2"
+                      >
+                        {content.contact.addressVal} 🚗
+                      </a>
                     </div>
                   </div>
                 </div>
               </div>
             </Reveal>
 
-            {/* Map Placeholder */}
+            {/* Google Map */}
             <Reveal width="100%" delay={0.1}>
-              <div className="bg-gray-200 dark:bg-slate-800 rounded-2xl h-48 md:h-64 overflow-hidden shadow-lg relative border border-gray-100 dark:border-slate-700">
-                 <img src="https://picsum.photos/800/400?blur=2" alt="Map Location" className="w-full h-full object-cover grayscale opacity-50" />
-                 <div className="absolute inset-0 flex items-center justify-center">
-                    <span className="bg-white/90 dark:bg-slate-700/90 backdrop-blur-sm px-4 py-2 rounded-lg shadow text-gray-800 dark:text-white font-medium text-sm md:text-base">
-                      {content.contact.map}
-                    </span>
-                 </div>
+              <div className="rounded-2xl h-48 md:h-64 overflow-hidden shadow-lg relative border border-gray-100 dark:border-slate-700">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3358.5!2d35.23!3d32.95!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151c4f6d8f5f5f5f%3A0x0!2sJdeida%20Mack%2C%20Israel!5e0!3m2!1sen!2s!4v1!5m2!1sen!2s"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  allowFullScreen
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="מיקום - ג'דיידה מכר"
+                  className="w-full h-full"
+                />
               </div>
             </Reveal>
           </div>
@@ -129,6 +141,8 @@ export const Contact: React.FC = () => {
                       type="tel"
                       id="phone"
                       name="phone"
+                      inputMode="numeric"
+                      pattern="[0-9\-]*"
                       required
                       value={formData.phone}
                       onChange={handleChange}

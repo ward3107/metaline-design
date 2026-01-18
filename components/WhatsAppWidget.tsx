@@ -7,12 +7,12 @@ export const WhatsAppWidget: React.FC = () => {
       href="https://wa.me/972555555555" // Replace with real number
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed bottom-24 right-6 md:bottom-8 md:right-8 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-lg hover:shadow-2xl transition-all flex items-center justify-center group"
-      whileHover={{ scale: 1.1, opacity: 1 }}
+      className="fixed bottom-24 right-6 md:bottom-8 md:right-8 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-lg hover:shadow-2xl transition-all flex items-center justify-center group opacity-50 hover:opacity-100"
+      whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.9 }}
       initial={{ opacity: 0, scale: 0 }}
       animate={{ opacity: 0.5, scale: 1 }}
-      transition={{ 
+      transition={{
         delay: 1,
         opacity: { duration: 0.3 }
       }}

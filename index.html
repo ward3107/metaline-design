@@ -1,10 +1,40 @@
 <!DOCTYPE html>
-<html lang="he" dir="rtl" class="scroll-smooth">
+<html class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Anton - פתרונות אלומיניום ופלדה</title>
     <meta name="description" content="Anton Aluminum & Steel Design Solutions" />
+
+    <!-- Anti-flicker script - must run before any content renders -->
+    <script>
+      (function() {
+        try {
+          const THEME_MODE_KEY = 'theme_mode';
+          const savedMode = localStorage.getItem(THEME_MODE_KEY);
+
+          // Determine initial theme
+          let theme = 'light';
+          if (savedMode === 'light' || savedMode === 'dark') {
+            theme = savedMode;
+          } else if (savedMode === 'system' || !savedMode) {
+            // System preference
+            theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+          }
+
+          // Apply theme immediately to prevent flicker
+          if (theme === 'dark') {
+            document.documentElement.classList.add('dark');
+          } else {
+            document.documentElement.classList.remove('dark');
+          }
+        } catch (e) {
+          // Fail silently - default to light
+          console.warn('Theme initialization failed:', e);
+        }
+      })();
+    </script>
+
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <script>

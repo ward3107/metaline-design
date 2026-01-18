@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
+import { MarkdownModal } from './MarkdownModal';
 
 export const Footer: React.FC = () => {
   const { content, language } = useLanguage();
+  const [modalOpen, setModalOpen] = useState(false);
+  const [modalConfig, setModalConfig] = useState({ title: '', path: '' });
   const spaceClass = language === 'he' ? 'space-x-reverse' : '';
   const iconMargin = language === 'he' ? 'ml-3' : 'mr-3';
 
@@ -81,10 +84,42 @@ export const Footer: React.FC = () => {
           </div>
         </div>
 
-        <div className="border-t border-gray-800 mt-12 pt-8 text-center text-sm text-gray-500">
+        {/* Legal Links */}
+        <div className="border-t border-gray-800 mt-12 pt-8">
+          <div className="flex flex-wrap justify-center gap-6 text-sm">
+            <button
+              onClick={() => setModalConfig({ title: 'Terms of Service', path: '/legal/terms.md' }) || setModalOpen(true)}
+              className="text-gray-400 hover:text-accent transition-colors"
+            >
+              Terms of Service
+            </button>
+            <button
+              onClick={() => setModalConfig({ title: 'Privacy Policy', path: '/legal/privacy.md' }) || setModalOpen(true)}
+              className="text-gray-400 hover:text-accent transition-colors"
+            >
+              Privacy Policy
+            </button>
+            <button
+              onClick={() => setModalConfig({ title: 'Help & FAQ', path: '/legal/help.md' }) || setModalOpen(true)}
+              className="text-gray-400 hover:text-accent transition-colors"
+            >
+              Help & FAQ
+            </button>
+          </div>
+        </div>
+
+        <div className="text-center text-sm text-gray-500 mt-6">
           <p>&copy; {new Date().getFullYear()} {content.companyName}. {content.footer.rights}</p>
         </div>
       </div>
+
+      {/* Markdown Modal */}
+      <MarkdownModal
+        isOpen={modalOpen}
+        onClose={() => setModalOpen(false)}
+        title={modalConfig.title}
+        path={modalConfig.path}
+      />
     </footer>
   );
 };

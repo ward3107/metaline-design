@@ -1,46 +1,47 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
-import { CONTENT } from '../translations';
+import React, { createContext, useContext } from 'react';
+import { useLanguage as useLanguageHook } from '../hooks/useLanguage';
+import { Language } from '../i18n';
 
-type Language = 'he' | 'en';
-
+/**
+ * Extended language context type supporting all three languages
+ */
 interface LanguageContextType {
   language: Language;
+  setLanguage: (lang: Language) => void;
   toggleLanguage: () => void;
-  content: typeof CONTENT['he'];
+  content: any;
   direction: 'rtl' | 'ltr';
+  dir: 'rtl' | 'ltr';
+  isRTL: boolean;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
+/**
+ * LanguageProvider - Provides language context to the application
+ *
+ * Uses the new i18n system with support for EN, HE, and AR languages.
+ * Maintains backward compatibility with existing code that uses
+ * the useLanguage hook.
+ */
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [language, setLanguage] = useState<Language>(() => {
-    const saved = localStorage.getItem('language');
-    return (saved === 'en' || saved === 'he') ? saved : 'he';
-  });
-
-  useEffect(() => {
-    // Update HTML attributes for global direction handling
-    document.documentElement.lang = language;
-    document.documentElement.dir = CONTENT[language].direction;
-    localStorage.setItem('language', language);
-  }, [language]);
-
-  const toggleLanguage = () => {
-    setLanguage(prev => prev === 'he' ? 'en' : 'he');
-  };
+  const languageState = useLanguageHook();
 
   return (
-    <LanguageContext.Provider value={{ 
-      language, 
-      toggleLanguage, 
-      content: CONTENT[language],
-      direction: CONTENT[language].direction as 'rtl' | 'ltr'
-    }}>
+    <LanguageContext.Provider value={languageState}>
       {children}
     </LanguageContext.Provider>
   );
 };
 
+/**
+ * useLanguage hook - Access language context
+ *
+ * Provides access to the current language and language change functions.
+ * Supports all three languages: EN, HE, and AR.
+ *
+ * @throws Error if used outside of LanguageProvider
+ */
 export const useLanguage = () => {
   const context = useContext(LanguageContext);
   if (context === undefined) {
