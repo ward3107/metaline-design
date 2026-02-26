@@ -4,7 +4,8 @@ import { Footer } from './Footer';
 import { ArrowUp } from 'lucide-react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { WhatsAppWidget } from './WhatsAppWidget';
-import { AccessibilityWidget } from './AccessibilityWidget';
+// AccessibilityWidget is now loaded via standalone JS (accessibility-widget.js)
+// for IS 5568 / WCAG 2.0 AA compliance
 import { CookieBanner } from './CookieBanner';
 import { useLanguage } from '../context/LanguageContext';
 
@@ -42,7 +43,7 @@ export const Layout = ({ children }: LayoutProps) => {
     });
   };
 
-  const btnPositionClass = language === 'he' ? 'left-8' : 'right-8';
+  const btnPositionClass = 'right-8';
 
   return (
     <div className="flex flex-col min-h-screen relative" dir={direction}>
@@ -61,9 +62,9 @@ export const Layout = ({ children }: LayoutProps) => {
         {children}
       </main>
       <Footer />
-      
+
       <WhatsAppWidget />
-      <AccessibilityWidget />
+      {/* Accessibility Widget loaded via standalone JS in index.html */}
       <CookieBanner privacyPolicyUrl="/privacy-policy" />
 
       {showTopBtn && (
