@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
@@ -96,15 +96,12 @@ export const Footer: React.FC = () => {
             >
               Terms of Service
             </button>
-            <button
-              onClick={() => {
-                setModalConfig({ title: 'Privacy Policy', path: '/legal/privacy.md' });
-                setModalOpen(true);
-              }}
+            <Link
+              to="/privacy-policy"
               className="text-gray-400 hover:text-accent transition-colors"
             >
-              Privacy Policy
-            </button>
+              {language === 'he' ? 'מדיניות פרטיות' : language === 'ar' ? 'سياسة الخصوصية' : 'Privacy Policy'}
+            </Link>
             <button
               onClick={() => {
                 setModalConfig({ title: 'Help & FAQ', path: '/legal/help.md' });

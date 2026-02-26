@@ -41,8 +41,41 @@
       })();
     </script>
 
-    <!-- Local CSS with Tailwind -->
-    <link rel="stylesheet" href="/index.css">
+    <!--
+      Cookie Consent — Amendment 13 compliant — GTM Consent Mode v2
+      Signals: analytics_storage, ad_storage, ad_user_data, ad_personalization
+      Built: 2026-02-26
+
+      IMPORTANT: This script MUST load BEFORE Google Tag Manager or any tracking scripts.
+      Replace GTM-XXXXXXX with your actual GTM Container ID in the GTM snippet below.
+    -->
+    <script>
+      // Initialize dataLayer
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+
+      // Set default consent state - all denied until user explicitly consents
+      // This complies with Israel's Privacy Protection Law Amendment 13 (August 2025)
+      gtag('consent', 'default', {
+        analytics_storage: 'denied',
+        ad_storage: 'denied',
+        ad_user_data: 'denied',
+        ad_personalization: 'denied',
+        wait_for_update: 2000  // Wait 2 seconds for user consent update
+      });
+    </script>
+    <!-- End GTM Consent Mode v2 Default State -->
+
+    <!--
+      Google Tag Manager - Uncomment and add your GTM Container ID
+      IMPORTANT: This should be placed AFTER the consent mode default script above
+
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-XXXXXXX');</script>
+    -->
 
 <script type="importmap">
 {

@@ -1,29 +1,29 @@
-import React from 'react';
+import { useState, useEffect, ReactNode } from 'react';
 import { Navbar } from './Navbar';
 import { Footer } from './Footer';
 import { ArrowUp } from 'lucide-react';
 import { motion, useScroll, useSpring } from 'framer-motion';
 import { WhatsAppWidget } from './WhatsAppWidget';
 import { AccessibilityWidget } from './AccessibilityWidget';
-import { CookieConsent } from './CookieConsent';
+import { CookieBanner } from './CookieBanner';
 import { useLanguage } from '../context/LanguageContext';
 
 interface LayoutProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
-export const Layout: React.FC<LayoutProps> = ({ children }) => {
-  const [showTopBtn, setShowTopBtn] = React.useState(false);
+export const Layout = ({ children }: LayoutProps) => {
+  const [showTopBtn, setShowTopBtn] = useState(false);
   const { scrollYProgress } = useScroll();
   const { direction, language } = useLanguage();
-  
+
   const scaleX = useSpring(scrollYProgress, {
     stiffness: 100,
     damping: 30,
     restDelta: 0.001
   });
 
-  React.useEffect(() => {
+  useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 400) {
         setShowTopBtn(true);
@@ -64,7 +64,7 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
       
       <WhatsAppWidget />
       <AccessibilityWidget />
-      <CookieConsent />
+      <CookieBanner privacyPolicyUrl="/privacy-policy" />
 
       {showTopBtn && (
         <button

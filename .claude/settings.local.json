@@ -9,7 +9,9 @@
       "Bash(git stash:*)",
       "Bash(git push:*)",
       "Bash(npm run build:*)",
-      "Bash(npm install:*)"
+      "Bash(npm install:*)",
+      "Bash(start:*)",
+      "Bash(npx tsc:*)"
     ]
   }
 }

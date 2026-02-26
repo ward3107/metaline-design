@@ -1,8 +1,36 @@
 import { Home, Grid, Image, Info, Phone, Shield, Building, Warehouse, Lock, Sun, Ruler } from 'lucide-react';
 import { Service, Product, GalleryItem, NavLink } from './types';
 
+// Company Configuration
 export const COMPANY_NAME = "אנטון";
 export const COMPANY_TAGLINE = "פתרונות אלומיניום ופלדה מתקדמים";
+
+// Contact Information
+export const CONTACT_CONFIG = {
+  phone: '*5555',
+  email: 'info@anton-aluminum.com',
+  address: {
+    street: 'המלאכה 12',
+    city: 'חולון',
+    country: 'ישראל',
+    streetEn: '12 HaMelacha St.',
+    cityEn: 'Holon',
+    countryEn: 'Israel',
+  },
+  workingHours: {
+    days: 'ראשון - חמישי',
+    daysEn: 'Sunday - Thursday',
+    hours: '08:00 - 18:00',
+  },
+  wazeUrl: 'https://ul.waze.com/ul?navigate=yes&q=HaMelacha+12+Holon+Israel',
+} as const;
+
+// Social Links (add actual links when available)
+export const SOCIAL_LINKS = {
+  facebook: '#',
+  instagram: '#',
+  whatsapp: CONTACT_CONFIG.phone,
+} as const;
 
 export const NAV_LINKS: NavLink[] = [
   { path: '/', label: 'בית' },

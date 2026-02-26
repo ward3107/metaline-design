@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Mail, Phone, MapPin, Send, ChevronDown } from 'lucide-react';
 import { Reveal } from '../components/Reveal';
 import { useLanguage } from '../context/LanguageContext';
+import { CONTACT_CONFIG } from '../constants';
 
 export const Contact: React.FC = () => {
   const { content, language } = useLanguage();
@@ -60,7 +61,7 @@ export const Contact: React.FC = () => {
                     </div>
                     <div>
                       <h3 className="font-bold text-gray-900 dark:text-white text-sm md:text-base">{content.contact.phone}</h3>
-                      <a href="tel:+97235555555" className="text-gray-600 dark:text-gray-400 mt-1 hover:text-accent dark:hover:text-accent transition-colors" dir="ltr">+972 3-555-5555</a>
+                      <a href={`tel:${CONTACT_CONFIG.phone}`} className="text-gray-600 dark:text-gray-400 mt-1 hover:text-accent dark:hover:text-accent transition-colors" dir="ltr">{CONTACT_CONFIG.phone}</a>
                       <p className="text-xs text-gray-500 mt-1">{content.contact.phoneNote}</p>
                     </div>
                   </div>
@@ -71,7 +72,7 @@ export const Contact: React.FC = () => {
                     </div>
                     <div>
                       <h3 className="font-bold text-gray-900 dark:text-white text-sm md:text-base">{content.contact.email}</h3>
-                      <p className="text-gray-600 dark:text-gray-400 mt-1 text-sm md:text-base">info@anton.co.il</p>
+                      <p className="text-gray-600 dark:text-gray-400 mt-1 text-sm md:text-base">{CONTACT_CONFIG.email}</p>
                     </div>
                   </div>
 
@@ -82,7 +83,7 @@ export const Contact: React.FC = () => {
                     <div>
                       <h3 className="font-bold text-gray-900 dark:text-white text-sm md:text-base">{content.contact.address}</h3>
                       <a
-                        href="https://ul.waze.com/ul?navigate=yes&q=HaMelacha+12+Holon+Israel"
+                        href={CONTACT_CONFIG.wazeUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-accent dark:text-accent mt-1 hover:text-accent-hover dark:hover:text-accent-hover transition-colors text-sm md:text-base block underline underline-offset-2"
