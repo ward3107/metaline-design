@@ -12,7 +12,7 @@ import {
 } from 'lucide-react';
 import { Reveal } from '../components/Reveal';
 import { useLanguage } from '../context/LanguageContext';
-import { CONTACT_CONFIG, GALLERY_ITEMS, WHATSAPP_NUMBER } from '../constants';
+import { CONTACT_CONFIG, GALLERY_ITEMS, HERO_IMAGE, WHATSAPP_NUMBER } from '../constants';
 
 // Localized copy for the new sections (Process, Stats, Featured) that the
 // existing translations don't cover. Hebrew is primary; others fall back.
@@ -148,7 +148,7 @@ export const Home: React.FC = () => {
         {/* Background image + gradient */}
         <div className="absolute inset-0">
           <img
-            src="https://images.unsplash.com/photo-1565793298595-6a879b1d9492?q=80&w=2400&auto=format&fit=crop"
+            src={HERO_IMAGE}
             alt=""
             aria-hidden="true"
             className="w-full h-full object-cover"
