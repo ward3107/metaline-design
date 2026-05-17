@@ -31,7 +31,7 @@ export const MobileMenuButton = ({
       <button
         ref={buttonRef}
         onClick={onToggle}
-        className={`p-2 rounded-md ${scrolled ? 'text-gray-900 dark:text-white' : 'text-gray-900 lg:text-white'}`}
+        className="p-2 rounded-md text-ink-950 dark:text-ink-50"
         aria-label="Toggle menu"
       >
         {isOpen ? <X size={28} /> : <Menu size={28} />}

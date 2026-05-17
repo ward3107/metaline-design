@@ -20,11 +20,18 @@ html.dark body {
   background-color: #0f172a;
 }
 
-/* Display headings: tighter tracking, fuller leading for Hebrew */
+/* Display headings: keep default letter-spacing — Hebrew script doesn't
+   render well with negative tracking, and the heavy weights already feel
+   confident without it. */
 .font-display {
   font-family: 'Rubik', sans-serif;
-  letter-spacing: -0.02em;
   font-feature-settings: 'ss01' on;
+}
+
+/* Latin headings can take a tiny bit of tracking; opt in explicitly. */
+:root[lang="en"] .font-display,
+:root[lang="ru"] .font-display {
+  letter-spacing: -0.015em;
 }
 
 /* Custom scrollbar — cold steel neutrals */
