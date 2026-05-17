@@ -3,7 +3,7 @@ import { Service, Product, GalleryItem, NavLink } from './types';
 
 // Company Configuration
 export const COMPANY_NAME = "אנטון";
-export const COMPANY_TAGLINE = "פתרונות אלומיניום ופלדה מתקדמים";
+export const COMPANY_TAGLINE = "מסגריה אומנותית · שערים, גדרות, מעקות, פרגולות וסורגים";
 
 // Contact Information
 // TODO(launch): Replace placeholder values before going live. The sentinels
