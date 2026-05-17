@@ -1,10 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { WHATSAPP_NUMBER } from '../constants';
 
 export const WhatsAppWidget: React.FC = () => {
   return (
     <motion.a
-      href="https://wa.me/972555555555" // Replace with real number
+      href={`https://wa.me/${WHATSAPP_NUMBER}`}
       target="_blank"
       rel="noopener noreferrer"
       className="fixed bottom-24 right-6 md:bottom-8 md:right-8 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-lg hover:shadow-2xl transition-all flex items-center justify-center group opacity-50 hover:opacity-100"

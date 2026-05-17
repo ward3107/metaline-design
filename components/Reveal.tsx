@@ -1,5 +1,4 @@
-import React, { useEffect, useRef } from 'react';
-import { motion, useInView, useAnimation } from 'framer-motion';
+import React, { useEffect, useRef, useState } from 'react';
 
 interface RevealProps {
   children: React.ReactNode;
@@ -8,54 +7,51 @@ interface RevealProps {
   direction?: "up" | "down" | "left" | "right";
 }
 
-export const Reveal: React.FC<RevealProps> = ({ 
-  children, 
-  width = "fit-content", 
-  delay = 0.25,
-  direction = "up"
+export const Reveal: React.FC<RevealProps> = ({
+  children,
+  width = "fit-content",
 }) => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
-  const mainControls = useAnimation();
+  const ref = useRef<HTMLDivElement | null>(null);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    if (isInView) {
-      mainControls.start("visible");
-    }
-  }, [isInView, mainControls]);
+    if (typeof window === 'undefined') return;
 
-  const getVariants = () => {
-    const hidden = { opacity: 0, x: 0, y: 0 };
-    const visible = { opacity: 1, x: 0, y: 0 };
-
-    switch (direction) {
-      case "up":
-        hidden.y = 75;
-        break;
-      case "down":
-        hidden.y = -75;
-        break;
-      case "left":
-        hidden.x = -75;
-        break;
-      case "right":
-        hidden.x = 75;
-        break;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+      setVisible(true);
+      return;
     }
 
-    return { hidden, visible };
-  };
+    const node = ref.current;
+    if (!node) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setVisible(true);
+            observer.disconnect();
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <div ref={ref} style={{ position: "relative", width, overflow: "hidden" }}>
-      <motion.div
-        variants={getVariants()}
-        initial="hidden"
-        animate={mainControls}
-        transition={{ duration: 0.6, delay: delay, ease: "easeOut" }}
-      >
-        {children}
-      </motion.div>
+    <div
+      ref={ref}
+      style={{
+        width,
+        opacity: visible ? 1 : 0,
+        transition: 'opacity 250ms ease-out',
+      }}
+    >
+      {children}
     </div>
   );
 };

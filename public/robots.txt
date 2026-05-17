@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# TODO(launch): replace example.com with the production domain
+Sitemap: https://metaline-design.example.com/sitemap.xml

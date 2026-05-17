@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import { Reveal } from '../components/Reveal';
-import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
 
 export const Products: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState('all');
   const { content } = useLanguage();
 
-  const filteredProducts = activeCategory === 'all' 
-    ? content.productsList 
+  const filteredProducts = activeCategory === 'all'
+    ? content.productsList
     : content.productsList.filter((p: { category: string }) => p.category === activeCategory);
 
   return (
@@ -32,9 +31,9 @@ export const Products: React.FC = () => {
             <button
               key={cat.id}
               onClick={() => setActiveCategory(cat.id)}
-              className={`px-4 md:px-6 py-2 rounded-full text-sm md:text-base font-medium transition-all duration-300 ${
+              className={`px-4 md:px-6 py-2 rounded-full text-sm md:text-base font-medium transition-colors ${
                 activeCategory === cat.id
-                  ? 'bg-accent text-white shadow-lg scale-105'
+                  ? 'bg-accent text-white shadow-md'
                   : 'bg-white dark:bg-slate-800 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700 hover:text-accent'
               }`}
             >
@@ -44,43 +43,33 @@ export const Products: React.FC = () => {
         </div>
 
         {/* Responsive Grid */}
-        <motion.div 
-          layout
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
-        >
-          <AnimatePresence mode="popLayout">
-            {filteredProducts.map((product: { id: string; title: string; description: string; image: string; category: string }) => (
-              <motion.div
-                layout
-                key={product.id}
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.3 }}
-                className="bg-white dark:bg-slate-800 rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow group flex flex-col"
-              >
-                <div className="relative h-48 sm:h-56 md:h-64 overflow-hidden">
-                  <img 
-                    src={product.image} 
-                    alt={product.title} 
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                    loading="lazy"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
-                    <span className="text-white font-medium">{content.buttons.viewDetails}</span>
-                  </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {filteredProducts.map((product: { id: string; title: string; description: string; image: string; category: string }) => (
+            <div
+              key={product.id}
+              className="bg-white dark:bg-slate-800 rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-shadow group flex flex-col"
+            >
+              <div className="relative h-48 sm:h-56 md:h-64 overflow-hidden">
+                <img
+                  src={product.image}
+                  alt={product.title}
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-end p-6">
+                  <span className="text-white font-medium">{content.buttons.viewDetails}</span>
                 </div>
-                <div className="p-5 md:p-6 flex-grow flex flex-col">
-                  <span className="text-[10px] md:text-xs font-semibold text-accent uppercase tracking-wider mb-2">
-                    {content.products.categories.find((c: { id: string; label: string }) => c.id === product.category)?.label}
-                  </span>
-                  <h3 className="text-lg md:text-xl font-bold text-gray-900 dark:text-white mb-2">{product.title}</h3>
-                  <p className="text-gray-600 dark:text-gray-400 text-sm line-clamp-2 mb-4">{product.description}</p>
-                </div>
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </motion.div>
+              </div>
+              <div className="p-5 md:p-6 flex-grow flex flex-col">
+                <span className="text-[10px] md:text-xs font-semibold text-accent uppercase tracking-wider mb-2">
+                  {content.products.categories.find((c: { id: string; label: string }) => c.id === product.category)?.label}
+                </span>
+                <h3 className="text-lg md:text-xl font-bold text-gray-900 dark:text-white mb-2">{product.title}</h3>
+                <p className="text-gray-600 dark:text-gray-400 text-sm line-clamp-2 mb-4">{product.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
 
         {filteredProducts.length === 0 && (
           <div className="text-center py-20">

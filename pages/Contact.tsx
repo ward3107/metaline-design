@@ -15,15 +15,22 @@ export const Contact: React.FC = () => {
     message: ''
   });
   const [submitted, setSubmitted] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
+  // TODO(launch): wire this to the chosen backend (Formspree, Resend, EmailJS…).
+  // For now the form intentionally errors instead of faking success, so
+  // missed submissions are visible. See PlaceholderBanner for the dev warning.
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
-    // Simulate API call
-    setTimeout(() => {
-        setSubmitted(false);
-        setFormData({ name: '', phone: '', email: '', designType: '', message: '' });
-    }, 3000);
+    const message =
+      language === 'he'
+        ? 'הטופס עדיין לא מחובר לשרת. אנא צרו קשר בטלפון או באימייל.'
+        : language === 'ar'
+        ? 'النموذج غير متصل بالخادم بعد. يرجى الاتصال بنا عبر الهاتف أو البريد الإلكتروني.'
+        : 'The form is not connected to a backend yet. Please call or email instead.';
+    setSubmitError(message);
+    // eslint-disable-next-line no-console
+    console.warn('[metaline-design] Contact form submit blocked: no backend wired up.', formData);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -209,8 +216,8 @@ export const Contact: React.FC = () => {
                   type="submit"
                   disabled={submitted}
                   className={`w-full py-4 rounded-lg font-bold text-lg flex items-center justify-center gap-2 transition-all ${
-                    submitted 
-                    ? 'bg-green-600 text-white cursor-default' 
+                    submitted
+                    ? 'bg-green-600 text-white cursor-default'
                     : 'bg-accent hover:bg-accent-hover text-white shadow-lg hover:shadow-xl'
                   }`}
                 >
@@ -222,6 +229,23 @@ export const Contact: React.FC = () => {
                     </>
                   )}
                 </button>
+
+                {submitError && (
+                  <div
+                    role="alert"
+                    className="p-4 rounded-lg bg-amber-50 dark:bg-amber-900/20 border border-amber-300 dark:border-amber-700/40 text-amber-800 dark:text-amber-200 text-sm"
+                  >
+                    {submitError}
+                    <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1">
+                      <a href={`tel:${CONTACT_CONFIG.phone}`} className="font-bold underline" dir="ltr">
+                        {CONTACT_CONFIG.phone}
+                      </a>
+                      <a href={`mailto:${CONTACT_CONFIG.email}`} className="font-bold underline">
+                        {CONTACT_CONFIG.email}
+                      </a>
+                    </div>
+                  </div>
+                )}
               </form>
             </div>
           </Reveal>

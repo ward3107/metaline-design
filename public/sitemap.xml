@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Note: the app uses HashRouter, so individual routes live behind the "#"
+  fragment and are not indexable by crawlers. Only the homepage is listed
+  until the routing strategy changes to BrowserRouter (which would also
+  require Vercel rewrites mapping all paths to /index.html).
+  TODO(launch): replace example.com with the production domain.
+-->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://metaline-design.example.com/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>
