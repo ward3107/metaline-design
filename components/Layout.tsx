@@ -2,7 +2,6 @@ import { useState, useEffect, ReactNode } from 'react';
 import { Navbar } from './Navbar';
 import { Footer } from './Footer';
 import { ArrowUp } from 'lucide-react';
-import { motion, useScroll, useSpring } from 'framer-motion';
 import { WhatsAppWidget } from './WhatsAppWidget';
 // AccessibilityWidget is now loaded via standalone JS (accessibility-widget.js)
 // for IS 5568 / WCAG 2.0 AA compliance
@@ -15,48 +14,26 @@ interface LayoutProps {
 
 export const Layout = ({ children }: LayoutProps) => {
   const [showTopBtn, setShowTopBtn] = useState(false);
-  const { scrollYProgress } = useScroll();
   const { direction, language } = useLanguage();
-
-  const scaleX = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 30,
-    restDelta: 0.001
-  });
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 400) {
-        setShowTopBtn(true);
-      } else {
-        setShowTopBtn(false);
-      }
+      setShowTopBtn(window.scrollY > 400);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const goToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
-
-  const btnPositionClass = 'right-8';
 
   return (
     <div className="flex flex-col min-h-screen relative" dir={direction}>
        <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:p-4 focus:bg-white focus:text-black focus:top-0 focus:right-0">
           {language === 'he' ? 'דלג לתוכן המרכזי' : 'Skip to main content'}
        </a>
-       
-       {/* Scroll Progress Bar */}
-      <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-accent z-50 origin-left rtl:origin-right"
-        style={{ scaleX }}
-      />
-      
+
       <Navbar />
       <main id="main-content" className="flex-grow pt-16">
         {children}
@@ -70,7 +47,7 @@ export const Layout = ({ children }: LayoutProps) => {
       {showTopBtn && (
         <button
           onClick={goToTop}
-          className={`fixed bottom-8 ${btnPositionClass} p-3 rounded-full bg-white text-black shadow-lg hover:scale-110 transition-all duration-300 z-50 mix-blend-difference animate-bounce`}
+          className="fixed bottom-8 right-8 p-3 rounded-full bg-white text-black shadow-lg hover:bg-gray-100 transition-colors z-50"
           aria-label="Back to top"
         >
           <ArrowUp size={24} />

@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Reveal } from '../components/Reveal';
-import { motion, AnimatePresence } from 'framer-motion';
 import { useLanguage } from '../context/LanguageContext';
 import { X, ZoomIn, ChevronLeft, ChevronRight } from 'lucide-react';
 
@@ -57,7 +56,7 @@ export const Gallery: React.FC = () => {
   }, [selectedItem, handleNext, handlePrev]);
 
   const allLabel = content.products.categories.find((c: { id: string; label: string }) => c.id === 'all')?.label || 'All';
-  
+
   const categories = [
     { id: 'all', label: allLabel },
     ...Object.entries(content.gallery.types).map(([id, label]) => ({ id, label }))
@@ -83,9 +82,9 @@ export const Gallery: React.FC = () => {
             <button
               key={cat.id}
               onClick={() => setFilter(cat.id)}
-              className={`px-4 md:px-6 py-2 rounded-full text-sm md:text-base font-medium transition-all duration-300 ${
+              className={`px-4 md:px-6 py-2 rounded-full text-sm md:text-base font-medium transition-colors ${
                 filter === cat.id
-                  ? 'bg-accent text-white shadow-lg scale-105'
+                  ? 'bg-accent text-white shadow-md'
                   : 'bg-white dark:bg-slate-800 text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-slate-700 hover:text-accent'
               }`}
             >
@@ -94,127 +93,94 @@ export const Gallery: React.FC = () => {
           ))}
         </div>
 
-        <motion.div 
-          layout
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6"
-        >
-          <AnimatePresence mode="popLayout">
-            {filteredItems.map((item: { id: string; title: string; image: string; category: string }, index: number) => (
-              <Reveal key={item.id} width="100%" delay={0.1 + (index % 3) * 0.1}>
-                <motion.div 
-                  layout
-                  className="relative group rounded-xl overflow-hidden cursor-pointer shadow-lg aspect-[4/3] sm:aspect-square md:aspect-[4/3]"
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-                  onClick={() => setSelectedItem(item)}
-                  layoutId={`gallery-item-${item.id}`}
-                >
-                  <motion.img 
-                    src={item.image} 
-                    alt={item.title} 
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                  
-                  {/* Overlay */}
-                  <div 
-                    className="absolute inset-0 bg-black/50 flex flex-col items-center justify-center text-center p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  >
-                    <motion.div
-                      className="mb-2 md:mb-4 text-white/80"
-                      initial={{ scale: 0.5, opacity: 0 }}
-                      whileHover={{ scale: 1, opacity: 1 }}
-                    >
-                      <ZoomIn size={28} className="md:w-8 md:h-8" />
-                    </motion.div>
-                    <h3 className="text-white text-lg md:text-2xl font-bold mb-1 md:mb-2 translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
-                      {item.title}
-                    </h3>
-                    <span className="text-accent text-sm md:text-base font-medium translate-y-4 group-hover:translate-y-0 transition-transform duration-300 delay-75">
-                      {content.gallery.types[item.category as keyof typeof content.gallery.types]}
-                    </span>
-                  </div>
-                </motion.div>
-              </Reveal>
-            ))}
-          </AnimatePresence>
-        </motion.div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+          {filteredItems.map((item: { id: string; title: string; image: string; category: string }) => (
+            <div
+              key={item.id}
+              className="relative group rounded-xl overflow-hidden cursor-pointer shadow-md hover:shadow-lg transition-shadow aspect-[4/3] sm:aspect-square md:aspect-[4/3]"
+              onClick={() => setSelectedItem(item)}
+            >
+              <img
+                src={item.image}
+                alt={item.title}
+                className="w-full h-full object-cover"
+                loading="lazy"
+              />
+
+              {/* Overlay */}
+              <div className="absolute inset-0 bg-black/50 flex flex-col items-center justify-center text-center p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                <div className="mb-2 md:mb-4 text-white/80">
+                  <ZoomIn size={28} className="md:w-8 md:h-8" />
+                </div>
+                <h3 className="text-white text-lg md:text-2xl font-bold mb-1 md:mb-2">
+                  {item.title}
+                </h3>
+                <span className="text-accent text-sm md:text-base font-medium">
+                  {content.gallery.types[item.category as keyof typeof content.gallery.types]}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
 
       {/* Lightbox Modal */}
-      <AnimatePresence>
-        {selectedItem && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-sm flex items-center justify-center p-2 sm:p-4"
+      {selectedItem && (
+        <div
+          className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-2 sm:p-4"
+          onClick={() => setSelectedItem(null)}
+        >
+          {/* Close Button */}
+          <button
+            className="absolute top-4 right-4 md:top-6 md:right-6 text-white/70 hover:text-white hover:bg-white/10 p-2 rounded-full transition-colors z-[110]"
             onClick={() => setSelectedItem(null)}
+            aria-label="Close"
           >
-            {/* Close Button */}
-            <button
-              className="absolute top-4 right-4 md:top-6 md:right-6 text-white/70 hover:text-white hover:bg-white/10 p-2 rounded-full transition-all z-[110]"
-              onClick={() => setSelectedItem(null)}
-              aria-label="Close"
-            >
-              <X size={28} className="md:w-8 md:h-8" />
-            </button>
+            <X size={28} className="md:w-8 md:h-8" />
+          </button>
 
-            {/* Navigation Buttons */}
-            {filteredItems.length > 1 && (
-              <>
-                <button
-                  className="absolute left-2 sm:left-4 md:left-8 top-1/2 -translate-y-1/2 text-white/50 hover:text-white bg-white/5 hover:bg-white/15 p-2 sm:p-3 rounded-full transition-all z-[110] backdrop-blur-sm"
-                  onClick={handlePrev}
-                  aria-label="Previous"
-                >
-                  <ChevronLeft size={32} className="md:w-10 md:h-10" />
-                </button>
-                <button
-                  className="absolute right-2 sm:right-4 md:right-8 top-1/2 -translate-y-1/2 text-white/50 hover:text-white bg-white/5 hover:bg-white/15 p-2 sm:p-3 rounded-full transition-all z-[110] backdrop-blur-sm"
-                  onClick={handleNext}
-                  aria-label="Next"
-                >
-                  <ChevronRight size={32} className="md:w-10 md:h-10" />
-                </button>
-              </>
-            )}
-
-            <motion.div
-              layoutId={`gallery-item-${selectedItem.id}`}
-              className="relative w-full max-w-5xl flex flex-col items-center"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="relative rounded-lg overflow-hidden shadow-2xl bg-black max-h-[75vh] sm:max-h-[80vh] w-auto">
-                <motion.img 
-                  key={selectedItem.id}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.3 }}
-                  src={selectedItem.image} 
-                  alt={selectedItem.title} 
-                  className="max-w-full h-auto max-h-[75vh] sm:max-h-[80vh] object-contain"
-                />
-              </div>
-              
-              <motion.div 
-                key={`text-${selectedItem.id}`}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 }}
-                className="mt-4 md:mt-6 text-center px-4"
+          {/* Navigation Buttons */}
+          {filteredItems.length > 1 && (
+            <>
+              <button
+                className="absolute left-2 sm:left-4 md:left-8 top-1/2 -translate-y-1/2 text-white/50 hover:text-white bg-white/5 hover:bg-white/15 p-2 sm:p-3 rounded-full transition-colors z-[110]"
+                onClick={handlePrev}
+                aria-label="Previous"
               >
-                <h2 className="text-xl md:text-3xl font-bold text-white mb-1 md:mb-2">{selectedItem.title}</h2>
-                <span className="inline-block px-3 py-1 rounded-full bg-accent text-white font-medium text-xs md:text-sm tracking-wide">
-                   {content.gallery.types[selectedItem.category as keyof typeof content.gallery.types]}
-                </span>
-              </motion.div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+                <ChevronLeft size={32} className="md:w-10 md:h-10" />
+              </button>
+              <button
+                className="absolute right-2 sm:right-4 md:right-8 top-1/2 -translate-y-1/2 text-white/50 hover:text-white bg-white/5 hover:bg-white/15 p-2 sm:p-3 rounded-full transition-colors z-[110]"
+                onClick={handleNext}
+                aria-label="Next"
+              >
+                <ChevronRight size={32} className="md:w-10 md:h-10" />
+              </button>
+            </>
+          )}
+
+          <div
+            className="relative w-full max-w-5xl flex flex-col items-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="relative rounded-lg overflow-hidden shadow-2xl bg-black max-h-[75vh] sm:max-h-[80vh] w-auto">
+              <img
+                key={selectedItem.id}
+                src={selectedItem.image}
+                alt={selectedItem.title}
+                className="max-w-full h-auto max-h-[75vh] sm:max-h-[80vh] object-contain"
+              />
+            </div>
+
+            <div className="mt-4 md:mt-6 text-center px-4">
+              <h2 className="text-xl md:text-3xl font-bold text-white mb-1 md:mb-2">{selectedItem.title}</h2>
+              <span className="inline-block px-3 py-1 rounded-full bg-accent text-white font-medium text-xs md:text-sm tracking-wide">
+                {content.gallery.types[selectedItem.category as keyof typeof content.gallery.types]}
+              </span>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
