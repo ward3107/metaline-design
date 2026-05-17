@@ -1,15 +1,44 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
-import { MarkdownModal } from './MarkdownModal';
+import { CONTACT_CONFIG } from '../constants';
+
+const legalLinksByLang: Record<string, { terms: string; refund: string; disclaimer: string; accessibility: string; privacy: string }> = {
+  he: {
+    terms: 'תנאי שימוש',
+    refund: 'מדיניות ביטולים',
+    disclaimer: 'הצהרת אחריות',
+    accessibility: 'הצהרת נגישות',
+    privacy: 'מדיניות פרטיות',
+  },
+  ar: {
+    terms: 'شروط الاستخدام',
+    refund: 'سياسة الإلغاء',
+    disclaimer: 'إخلاء المسؤولية',
+    accessibility: 'بيان الوصول',
+    privacy: 'سياسة الخصوصية',
+  },
+  en: {
+    terms: 'Terms of Use',
+    refund: 'Refund Policy',
+    disclaimer: 'Disclaimer',
+    accessibility: 'Accessibility',
+    privacy: 'Privacy Policy',
+  },
+  ru: {
+    terms: 'Условия использования',
+    refund: 'Политика возврата',
+    disclaimer: 'Отказ от ответственности',
+    accessibility: 'Доступность',
+    privacy: 'Политика конфиденциальности',
+  },
+};
 
 export const Footer: React.FC = () => {
   const { content, language } = useLanguage();
-  const [modalOpen, setModalOpen] = useState(false);
-  const [modalConfig, setModalConfig] = useState({ title: '', path: '' });
   const spaceClass = language === 'he' ? 'space-x-reverse' : '';
   const iconMargin = language === 'he' ? 'ml-3' : 'mr-3';
+  const legal = legalLinksByLang[language] || legalLinksByLang.en;
 
   return (
     <footer className="bg-primary text-gray-300">
@@ -74,11 +103,15 @@ export const Footer: React.FC = () => {
               </li>
               <li className="flex items-center">
                 <Phone className={`${iconMargin} text-accent shrink-0`} size={20} />
-                <span dir="ltr">+972 3-555-5555</span>
+                <a href={`tel:${CONTACT_CONFIG.phone}`} dir="ltr" className="hover:text-accent transition-colors">
+                  {CONTACT_CONFIG.phone}
+                </a>
               </li>
               <li className="flex items-center">
                 <Mail className={`${iconMargin} text-accent shrink-0`} size={20} />
-                <span>info@anton.co.il</span>
+                <a href={`mailto:${CONTACT_CONFIG.email}`} className="hover:text-accent transition-colors">
+                  {CONTACT_CONFIG.email}
+                </a>
               </li>
             </ul>
           </div>
@@ -86,31 +119,12 @@ export const Footer: React.FC = () => {
 
         {/* Legal Links */}
         <div className="border-t border-gray-800 mt-12 pt-8">
-          <div className="flex flex-wrap justify-center gap-6 text-sm">
-            <button
-              onClick={() => {
-                setModalConfig({ title: 'Terms of Service', path: '/legal/terms.md' });
-                setModalOpen(true);
-              }}
-              className="text-gray-400 hover:text-accent transition-colors"
-            >
-              Terms of Service
-            </button>
-            <Link
-              to="/privacy-policy"
-              className="text-gray-400 hover:text-accent transition-colors"
-            >
-              {language === 'he' ? 'מדיניות פרטיות' : language === 'ar' ? 'سياسة الخصوصية' : 'Privacy Policy'}
-            </Link>
-            <button
-              onClick={() => {
-                setModalConfig({ title: 'Help & FAQ', path: '/legal/help.md' });
-                setModalOpen(true);
-              }}
-              className="text-gray-400 hover:text-accent transition-colors"
-            >
-              Help & FAQ
-            </button>
+          <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm">
+            <Link to="/terms" className="text-gray-400 hover:text-accent transition-colors">{legal.terms}</Link>
+            <Link to="/refund-policy" className="text-gray-400 hover:text-accent transition-colors">{legal.refund}</Link>
+            <Link to="/disclaimer" className="text-gray-400 hover:text-accent transition-colors">{legal.disclaimer}</Link>
+            <Link to="/accessibility" className="text-gray-400 hover:text-accent transition-colors">{legal.accessibility}</Link>
+            <Link to="/privacy-policy" className="text-gray-400 hover:text-accent transition-colors">{legal.privacy}</Link>
           </div>
         </div>
 
@@ -118,14 +132,6 @@ export const Footer: React.FC = () => {
           <p>&copy; {new Date().getFullYear()} {content.companyName}. {content.footer.rights}</p>
         </div>
       </div>
-
-      {/* Markdown Modal */}
-      <MarkdownModal
-        isOpen={modalOpen}
-        onClose={() => setModalOpen(false)}
-        title={modalConfig.title}
-        path={modalConfig.path}
-      />
     </footer>
   );
 };

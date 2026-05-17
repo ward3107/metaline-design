@@ -6,6 +6,7 @@ import { WhatsAppWidget } from './WhatsAppWidget';
 // AccessibilityWidget is now loaded via standalone JS (accessibility-widget.js)
 // for IS 5568 / WCAG 2.0 AA compliance
 import { CookieBanner } from './CookieBanner';
+import { PlaceholderBanner } from './PlaceholderBanner';
 import { useLanguage } from '../context/LanguageContext';
 
 interface LayoutProps {
@@ -43,6 +44,7 @@ export const Layout = ({ children }: LayoutProps) => {
       <WhatsAppWidget />
       {/* Accessibility Widget loaded via standalone JS in index.html */}
       <CookieBanner privacyPolicyUrl="/privacy-policy" />
+      <PlaceholderBanner />
 
       {showTopBtn && (
         <button

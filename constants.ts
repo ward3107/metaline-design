@@ -6,6 +6,10 @@ export const COMPANY_NAME = "אנטון";
 export const COMPANY_TAGLINE = "פתרונות אלומיניום ופלדה מתקדמים";
 
 // Contact Information
+// TODO(launch): Replace placeholder values before going live. The sentinels
+// (phone "*5555", email "info@anton-aluminum.com") are detected by the
+// dev-mode PlaceholderBanner; do not change them to other fakes — replace
+// with real values.
 export const CONTACT_CONFIG = {
   phone: '*5555',
   email: 'info@anton-aluminum.com',
@@ -25,11 +29,15 @@ export const CONTACT_CONFIG = {
   wazeUrl: 'https://ul.waze.com/ul?navigate=yes&q=HaMelacha+12+Holon+Israel',
 } as const;
 
+// WhatsApp click-to-chat number in international E.164 format without "+".
+// TODO(launch): replace with the real number (e.g. '972501234567').
+export const WHATSAPP_NUMBER = '972555555555';
+
 // Social Links (add actual links when available)
 export const SOCIAL_LINKS = {
   facebook: '#',
   instagram: '#',
-  whatsapp: CONTACT_CONFIG.phone,
+  whatsapp: WHATSAPP_NUMBER,
 } as const;
 
 export const NAV_LINKS: NavLink[] = [
