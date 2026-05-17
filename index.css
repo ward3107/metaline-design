@@ -1,35 +1,60 @@
 @import "tailwindcss";
 
+:root {
+  color-scheme: light dark;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
 body {
   font-family: 'Rubik', sans-serif;
   overflow-x: hidden;
+  background-color: #fafaf9;
 }
 
-/* Custom Scrollbar */
+html.dark body {
+  background-color: #0c0a09;
+}
+
+/* Display headings: tighter tracking, fuller leading for Hebrew */
+.font-display {
+  font-family: 'Rubik', sans-serif;
+  letter-spacing: -0.02em;
+  font-feature-settings: 'ss01' on;
+}
+
+/* Custom Scrollbar — warm neutrals */
 ::-webkit-scrollbar {
   width: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #f5f5f4;
 }
 .dark ::-webkit-scrollbar-track {
-  background: #1e293b;
+  background: #1c1917;
 }
 ::-webkit-scrollbar-thumb {
-  background: #888;
+  background: #a8a29e;
   border-radius: 5px;
 }
+.dark ::-webkit-scrollbar-thumb {
+  background: #44403c;
+}
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+  background: #78716c;
 }
 
-/* Accessibility Focus Styles */
+/* Accessibility focus styles — amber to match brand */
 :focus-visible {
-  outline: 3px solid #eab308;
+  outline: 3px solid #f59e0b;
   outline-offset: 2px;
 }
 
-/* Accessibility Overrides */
+/* Accessibility overrides */
 body.font-readable, body.font-readable * {
   font-family: Arial, Helvetica, sans-serif !important;
   letter-spacing: 0.05em;
@@ -39,4 +64,13 @@ body.underline-links a {
   text-decoration: underline !important;
   text-decoration-thickness: 2px !important;
   text-underline-offset: 4px;
+}
+
+/* Marquee for eyebrow text */
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.25em;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #f59e0b;
 }

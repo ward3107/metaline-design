@@ -47,7 +47,7 @@ export const Navbar = () => {
 
   const navClasses = `fixed w-full z-40 transition-all duration-300 ${
     scrolled
-      ? 'bg-white/95 dark:bg-slate-900/95 backdrop-blur-md shadow-md py-2'
+      ? 'bg-white/90 dark:bg-ink-950/85 backdrop-blur-md border-b border-ink-200/60 dark:border-ink-800/60 py-2'
       : 'bg-transparent py-4'
   }`;
 
