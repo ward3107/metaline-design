@@ -12,13 +12,13 @@ import {
 } from 'lucide-react';
 import { Reveal } from '../components/Reveal';
 import { useLanguage } from '../context/LanguageContext';
-import { CONTACT_CONFIG, GALLERY_ITEMS, WHATSAPP_NUMBER } from '../constants';
+import { CONTACT_CONFIG, GALLERY_ITEMS, HERO_IMAGE, WHATSAPP_NUMBER } from '../constants';
 
 // Localized copy for the new sections (Process, Stats, Featured) that the
 // existing translations don't cover. Hebrew is primary; others fall back.
 const sectionCopy = {
   he: {
-    eyebrow: 'אנטון · אלומיניום ופלדה',
+    eyebrow: 'אנטון · מסגריה אומנותית',
     secondaryCta: 'התקשרו עכשיו',
     whatsapp: 'דברו איתנו בוואטסאפ',
     stats: [
@@ -46,7 +46,7 @@ const sectionCopy = {
     finalFormCta: 'מלאו טופס קצר',
   },
   ar: {
-    eyebrow: 'أنتون · الألومنيوم والصلب',
+    eyebrow: 'أنتون · أعمال حدادة',
     secondaryCta: 'اتصل الآن',
     whatsapp: 'تحدث معنا على واتساب',
     stats: [
@@ -74,7 +74,7 @@ const sectionCopy = {
     finalFormCta: 'املأ نموذجًا قصيرًا',
   },
   en: {
-    eyebrow: 'Anton · Aluminum & Steel',
+    eyebrow: 'Anton · Custom Metalwork',
     secondaryCta: 'Call us',
     whatsapp: 'Chat on WhatsApp',
     stats: [
@@ -102,7 +102,7 @@ const sectionCopy = {
     finalFormCta: 'Send a short brief',
   },
   ru: {
-    eyebrow: 'Антон · Алюминий и сталь',
+    eyebrow: 'Антон · Художественная ковка',
     secondaryCta: 'Позвонить',
     whatsapp: 'Написать в WhatsApp',
     stats: [
@@ -148,7 +148,7 @@ export const Home: React.FC = () => {
         {/* Background image + gradient */}
         <div className="absolute inset-0">
           <img
-            src="https://images.unsplash.com/photo-1565793298595-6a879b1d9492?q=80&w=2400&auto=format&fit=crop"
+            src={HERO_IMAGE}
             alt=""
             aria-hidden="true"
             className="w-full h-full object-cover"
@@ -161,7 +161,7 @@ export const Home: React.FC = () => {
         <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 pb-16 md:pb-24 pt-32">
           <div className="max-w-3xl">
             <Reveal>
-              <p className="eyebrow text-amber-400 mb-5">{t.eyebrow}</p>
+              <p className="eyebrow text-accent mb-5">{t.eyebrow}</p>
             </Reveal>
             <Reveal>
               <h1 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-black leading-[1.02] tracking-tightest text-white mb-6">

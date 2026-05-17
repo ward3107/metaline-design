@@ -3,7 +3,7 @@ import { Home, Shield, Building, Warehouse, Lock, Sun, Ruler } from 'lucide-reac
 export const en = {
   direction: 'ltr',
   companyName: "Anton",
-  tagline: "Advanced Aluminum & Steel Solutions",
+  tagline: "Custom Metalwork · Gates, Fences, Railings, Pergolas & Bars",
   nav: [
     { path: '/', label: 'Home' },
     { path: '/products', label: 'Products' },
@@ -46,13 +46,13 @@ export const en = {
     }
   },
   home: {
-    heroTitle: 'Design & Safety',
-    heroHighlight: 'Without Compromise',
-    heroDesc: 'We specialize in the planning, manufacturing, and installation of premium gates, fences, and shading solutions.',
-    servicesTitle: 'Our Solutions',
-    servicesDesc: 'A wide range of quality products customized to your needs. Drag to explore all services.',
-    ctaTitle: 'Ready to Upgrade Your Property?',
-    ctaDesc: 'Our professional team is available for an initial consultation without obligation. Let\'s plan your next project together.',
+    heroTitle: 'Custom metalwork',
+    heroHighlight: 'built to last',
+    heroDesc: 'Design, manufacture, and installation of electric gates, fences, pergolas, railings, and security bars — aluminum and steel, custom for homes and businesses.',
+    servicesTitle: 'Our metalwork',
+    servicesDesc: 'A professional metalwork shop with over 20 years of experience. Every piece is built carefully in our Holon workshop.',
+    ctaTitle: 'Looking for a professional metalworker?',
+    ctaDesc: 'Our team is available for consultation, on-site measurement, and a quote — no obligation. Let\'s plan your project together.',
     ctaButton: 'Talk to Us Today',
     features: {
       warranty: { title: 'Full Warranty', desc: 'All our products come with a comprehensive warranty for your peace of mind.' },

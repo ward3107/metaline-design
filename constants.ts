@@ -3,7 +3,7 @@ import { Service, Product, GalleryItem, NavLink } from './types';
 
 // Company Configuration
 export const COMPANY_NAME = "אנטון";
-export const COMPANY_TAGLINE = "פתרונות אלומיניום ופלדה מתקדמים";
+export const COMPANY_TAGLINE = "מסגריה אומנותית · שערים, גדרות, מעקות, פרגולות וסורגים";
 
 // Contact Information
 // TODO(launch): Replace placeholder values before going live. The sentinels
@@ -48,69 +48,90 @@ export const NAV_LINKS: NavLink[] = [
   { path: '/contact', label: 'צור קשר' },
 ];
 
+// Curated metalwork photos from Unsplash, keyed by category. These stand
+// in for real project photos until the user uploads their own work.
+// TODO(launch): replace with the shop's actual project photography.
+const UNSPLASH = 'https://images.unsplash.com/photo-';
+const Q = '?q=80&w=1200&auto=format&fit=crop';
+export const HERO_IMAGE = `${UNSPLASH}1746155885811-ace3b5afd12d?q=80&w=2400&auto=format&fit=crop`;
+const CATEGORY_IMAGE = {
+  gates: `${UNSPLASH}1759355787286-f1c5fd456a0d${Q}`,
+  fences: `${UNSPLASH}1769697694226-dcd646ca50c1${Q}`,
+  pergolas: `${UNSPLASH}1775903961716-7c2cd1b932d8${Q}`,
+  railings: `${UNSPLASH}1766156181041-0dc63ec093ff${Q}`,
+  cladding: `${UNSPLASH}1598638567141-696be94b464a${Q}`,
+  bars: `${UNSPLASH}1761542928043-503ab1870832${Q}`,
+} as const;
+const PROJECT_IMAGE = {
+  villaGate: `${UNSPLASH}1761347604632-944c4400093a${Q}`,
+  techOffice: `${UNSPLASH}1623051786552-e46ef84e6c07${Q}`,
+  penthouseBalcony: `${UNSPLASH}1776363116182-51694a04a1d5${Q}`,
+  gardenPergola: `${UNSPLASH}1696846911635-83b97e53fb65${Q}`,
+} as const;
+
 export const SERVICES: Service[] = [
   {
     id: 'gates',
     title: 'שערים חשמליים',
-    description: 'שערים מעוצבים מאלומיניום ופלדה, המשלבים בטיחות מקסימלית עם עיצוב מודרני ויוקרתי לבית ולעסק.',
+    description: 'שערים מאלומיניום ופלדה, חשמליים או ידניים, המשלבים בטיחות מקסימלית עם עיצוב מודרני ויוקרתי לבית ולעסק.',
     icon: Shield,
-    image: 'https://picsum.photos/800/600?random=1'
+    image: CATEGORY_IMAGE.gates,
   },
   {
     id: 'fences',
     title: 'גדרות מעוצבות',
-    description: 'פתרונות גידור היקפיים השומרים על הפרטיות שלכם תוך שמירה על קו עיצובי נקי ואסתטי.',
+    description: 'פתרונות גידור היקפיים השומרים על הפרטיות שלכם, בקווים נקיים ואסתטיים — גדרות רפפות, פלדה מודרנית ועיצובים מותאמים.',
     icon: Ruler,
-    image: 'https://picsum.photos/800/600?random=2'
+    image: CATEGORY_IMAGE.fences,
   },
   {
     id: 'pergolas',
-    title: 'פרגולות הצללה',
-    description: 'פרגולות אלומיניום מתקדמות, חשמליות או קבועות, העמידות בכל מזג אוויר ואינן דורשות תחזוקה.',
+    title: 'פרגולות אלומיניום',
+    description: 'פרגולות מתקדמות, חשמליות או קבועות, עמידות בכל מזג אוויר ואינן דורשות תחזוקה. ללא חלודה, ללא צבע מתקלף.',
     icon: Sun,
-    image: 'https://picsum.photos/800/600?random=3'
+    image: CATEGORY_IMAGE.pergolas,
   },
   {
     id: 'railings',
     title: 'מעקות בטיחות',
-    description: 'מעקות זכוכית ואלומיניום למרפסות ומדרגות, המשלבים שקיפות ובטיחות בתקנים המחמירים ביותר.',
+    description: 'מעקות זכוכית, אלומיניום ופלדה למרפסות ולמדרגות. שקיפות, בטיחות ועמידה בתקני בטיחות מחמירים.',
     icon: Home,
-    image: 'https://picsum.photos/800/600?random=4'
+    image: CATEGORY_IMAGE.railings,
   },
   {
     id: 'cladding',
     title: 'חיפויי אלומיניום',
-    description: 'חיפויי קיר מתקדמים המעניקים למבנה מראה חדשני, בידוד תרמי והגנה לאורך שנים.',
+    description: 'חיפויי קיר חיצוניים המעניקים למבנה מראה חדשני, בידוד תרמי והגנה לאורך עשרות שנים.',
     icon: Building,
-    image: 'https://picsum.photos/800/600?random=5'
+    image: CATEGORY_IMAGE.cladding,
   },
   {
     id: 'bars',
-    title: 'סורגים',
-    description: 'סורגים דקורטיביים שאינם פוגעים בנוף, מספקים הגנה מקסימלית ושקט נפשי.',
+    title: 'סורגים דקורטיביים',
+    description: 'סורגי בטיחות מעוצבים שאינם פוגעים בנוף — הגנה מקסימלית עם קווים נקיים שמשתלבים בעיצוב הבית.',
     icon: Lock,
-    image: 'https://picsum.photos/800/600?random=6'
-  }
+    image: CATEGORY_IMAGE.bars,
+  },
 ];
 
 export const PRODUCTS: Product[] = [
-  { id: '1', category: 'gates', title: 'שער כניסה הייטק', description: 'שער אלומיניום דגם הייטק עם מנוע נסתר', image: 'https://picsum.photos/600/400?random=10' },
-  { id: '2', category: 'gates', title: 'שער כנף קלאסי', description: 'שער כנף בעיצוב קלאסי עם פיתוחים', image: 'https://picsum.photos/600/400?random=11' },
-  { id: '3', category: 'fences', title: 'גדר רפפות', description: 'גדר אלומיניום דגם רפפות לפרטיות מלאה', image: 'https://picsum.photos/600/400?random=12' },
-  { id: '4', category: 'fences', title: 'גדר הייטק', description: 'גדר בקווים ישרים ונקיים', image: 'https://picsum.photos/600/400?random=13' },
-  { id: '5', category: 'pergolas', title: 'פרגולה תלויה', description: 'פרגולה ללא עמודים בעיצוב מרחף', image: 'https://picsum.photos/600/400?random=14' },
-  { id: '6', category: 'pergolas', title: 'פרגולה חשמלית', description: 'פרגולה נאספת עם שלט רחוק', image: 'https://picsum.photos/600/400?random=15' },
-  { id: '7', category: 'railings', title: 'מעקה זכוכית', description: 'מעקה זכוכית שתולה ללא עמודים', image: 'https://picsum.photos/600/400?random=16' },
-  { id: '8', category: 'cladding', title: 'חיפוי דמוי עץ', description: 'חיפוי אלומיניום בגמר דמוי עץ איכותי', image: 'https://picsum.photos/600/400?random=17' },
+  { id: '1', category: 'gates', title: 'שער כניסה הייטק', description: 'שער אלומיניום דגם הייטק עם מנוע נסתר', image: CATEGORY_IMAGE.gates },
+  { id: '2', category: 'gates', title: 'שער כנף קלאסי', description: 'שער כנף בעיצוב קלאסי עם פיתוחים', image: PROJECT_IMAGE.villaGate },
+  { id: '3', category: 'fences', title: 'גדר רפפות', description: 'גדר אלומיניום דגם רפפות לפרטיות מלאה', image: CATEGORY_IMAGE.fences },
+  { id: '4', category: 'fences', title: 'גדר הייטק', description: 'גדר בקווים ישרים ונקיים', image: CATEGORY_IMAGE.fences },
+  { id: '5', category: 'pergolas', title: 'פרגולה תלויה', description: 'פרגולה ללא עמודים בעיצוב מרחף', image: CATEGORY_IMAGE.pergolas },
+  { id: '6', category: 'pergolas', title: 'פרגולה חשמלית', description: 'פרגולה נאספת עם שלט רחוק', image: PROJECT_IMAGE.gardenPergola },
+  { id: '7', category: 'railings', title: 'מעקה זכוכית', description: 'מעקה זכוכית שתולה ללא עמודים', image: CATEGORY_IMAGE.railings },
+  { id: '8', category: 'cladding', title: 'חיפוי דמוי עץ', description: 'חיפוי אלומיניום בגמר דמוי עץ איכותי', image: CATEGORY_IMAGE.cladding },
 ];
 
 export const GALLERY_ITEMS: GalleryItem[] = [
-  { id: '1', category: 'residential', title: 'וילה בסביון', image: 'https://picsum.photos/800/800?random=20' },
-  { id: '2', category: 'commercial', title: 'משרדי הייטק הרצליה', image: 'https://picsum.photos/800/600?random=21' },
-  { id: '3', category: 'residential', title: 'בית פרטי בקיסריה', image: 'https://picsum.photos/600/800?random=22' },
-  { id: '4', category: 'outdoor', title: 'גינה מעוצבת רמת השרון', image: 'https://picsum.photos/800/600?random=23' },
-  { id: '5', category: 'residential', title: 'פנטהאוז תל אביב', image: 'https://picsum.photos/800/800?random=24' },
-  { id: '6', category: 'commercial', title: 'קניון עזריאלי', image: 'https://picsum.photos/600/600?random=25' },
+  { id: '1', category: 'residential', title: 'וילה בסביון', image: PROJECT_IMAGE.villaGate },
+  { id: '2', category: 'commercial', title: 'משרדי הייטק הרצליה', image: PROJECT_IMAGE.techOffice },
+  { id: '3', category: 'residential', title: 'בית פרטי בקיסריה', image: CATEGORY_IMAGE.gates },
+  { id: '4', category: 'outdoor', title: 'גינה מעוצבת רמת השרון', image: PROJECT_IMAGE.gardenPergola },
+  { id: '5', category: 'residential', title: 'פנטהאוז תל אביב', image: PROJECT_IMAGE.penthouseBalcony },
+  { id: '6', category: 'commercial', title: 'קניון עזריאלי', image: CATEGORY_IMAGE.cladding },
 ];
 
 export const CATEGORIES = [

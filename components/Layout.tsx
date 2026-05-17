@@ -49,7 +49,7 @@ export const Layout = ({ children }: LayoutProps) => {
       {showTopBtn && (
         <button
           onClick={goToTop}
-          className="fixed bottom-8 right-8 p-3 rounded-full bg-white text-black shadow-lg hover:bg-gray-100 transition-colors z-50"
+          className="fixed bottom-44 left-4 md:bottom-44 md:left-6 p-3 rounded-full bg-white/95 dark:bg-ink-800 dark:text-white text-black ring-1 ring-black/10 dark:ring-white/10 shadow-lg hover:shadow-xl transition-shadow z-50"
           aria-label="Back to top"
         >
           <ArrowUp size={24} />
