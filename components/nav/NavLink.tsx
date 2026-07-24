@@ -34,9 +34,7 @@ export const NavLink = ({ path, label, scrolled, onClick, variant = 'desktop' }:
       className={`text-lg font-medium transition-colors duration-200 ${
         isActive
           ? 'text-accent'
-          : scrolled
-            ? 'text-gray-800 dark:text-gray-200 hover:text-accent'
-            : 'text-gray-800 lg:text-white hover:text-accent'
+          : 'text-ink-800 dark:text-ink-300 hover:text-accent'
       }`}
     >
       {label}

@@ -45,10 +45,12 @@ export const Navbar = () => {
 
   const closeMenu = () => setIsOpen(false);
 
+  // Always solid background. The "transparent on hero" look caused white
+  // navbar text to disappear on inner pages that don't have a dark hero.
   const navClasses = `fixed w-full z-40 transition-all duration-300 ${
     scrolled
-      ? 'bg-white/90 dark:bg-ink-950/85 backdrop-blur-md border-b border-ink-200/60 dark:border-ink-800/60 py-2'
-      : 'bg-transparent py-4'
+      ? 'bg-white/95 dark:bg-ink-950/90 backdrop-blur-md border-b border-ink-200 dark:border-ink-800 py-2 shadow-sm'
+      : 'bg-white/95 dark:bg-ink-950/90 backdrop-blur-sm py-4'
   }`;
 
   const spaceClass = language === 'he' ? 'space-x-reverse' : '';

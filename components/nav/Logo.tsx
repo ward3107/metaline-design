@@ -7,7 +7,7 @@ interface LogoProps {
   onClick: () => void;
 }
 
-export const Logo = ({ companyName, scrolled, spaceClass, onClick }: LogoProps) => {
+export const Logo = ({ companyName, spaceClass, onClick }: LogoProps) => {
   return (
     <Link
       to="/"
@@ -17,7 +17,7 @@ export const Logo = ({ companyName, scrolled, spaceClass, onClick }: LogoProps) 
       <div className="w-10 h-10 bg-accent rounded-sm flex items-center justify-center">
         <span className="text-white font-bold text-xl">A</span>
       </div>
-      <span className={`text-2xl font-bold tracking-tight ${scrolled ? 'text-gray-900 dark:text-white' : 'text-gray-900 lg:text-white'}`}>
+      <span className="text-2xl font-bold tracking-tight text-ink-950 dark:text-ink-50">
         {companyName}
       </span>
     </Link>

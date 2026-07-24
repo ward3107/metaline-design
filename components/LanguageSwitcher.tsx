@@ -62,9 +62,10 @@ export const LanguageSwitcher: React.FC<LanguageSwitcherProps> = ({
     buttonRef.current?.focus();
   };
 
-  const baseClasses = scrolled
-    ? 'text-gray-800 dark:text-gray-200'
-    : 'text-white';
+  // Navbar now has a solid background in every state, so the language
+  // switcher always uses dark-on-light / light-on-dark coloring.
+  void scrolled;
+  const baseClasses = 'text-ink-800 dark:text-ink-300';
 
   const dropdownClasses = `
     absolute top-full mt-2 right-0

@@ -144,7 +144,7 @@ export const Home: React.FC = () => {
   return (
     <div className="bg-ink-50 dark:bg-ink-950 text-ink-950 dark:text-ink-50">
       {/* ────────────────────────────── HERO ────────────────────────────── */}
-      <section className="relative min-h-[88vh] flex items-end overflow-hidden">
+      <section className="relative min-h-[78vh] md:min-h-[88vh] flex items-end overflow-hidden">
         {/* Background image + gradient */}
         <div className="absolute inset-0">
           <img
@@ -158,13 +158,13 @@ export const Home: React.FC = () => {
           <div className="absolute inset-0 bg-gradient-to-r from-ink-950/70 via-transparent to-transparent" />
         </div>
 
-        <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 pb-16 md:pb-24 pt-32">
+        <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 pb-12 md:pb-24 pt-24 md:pt-32">
           <div className="max-w-3xl">
             <Reveal>
-              <p className="eyebrow text-accent mb-5">{t.eyebrow}</p>
+              <p className="eyebrow text-accent mb-4 md:mb-5">{t.eyebrow}</p>
             </Reveal>
             <Reveal>
-              <h1 className="font-display text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-black leading-[1.02] tracking-tightest text-white mb-6">
+              <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[1.08] md:leading-[1.05] tracking-normal text-white mb-5 md:mb-6">
                 {content.home.heroTitle}{' '}
                 <span className="text-accent">{content.home.heroHighlight}</span>.
               </h1>
@@ -221,7 +221,7 @@ export const Home: React.FC = () => {
             <div className="lg:col-span-5">
               <Reveal>
                 <p className="eyebrow mb-4">{content.home.servicesTitle}</p>
-                <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-black leading-[1.05] tracking-tightest text-ink-950 dark:text-ink-50">
+                <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-black leading-[1.05] tracking-normal text-ink-950 dark:text-ink-50">
                   {content.home.servicesTitle}
                 </h2>
               </Reveal>
@@ -279,7 +279,7 @@ export const Home: React.FC = () => {
           <div className="max-w-3xl mb-16">
             <Reveal>
               <p className="eyebrow mb-4">{t.processEyebrow}</p>
-              <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-black leading-[1.05] tracking-tightest text-ink-950 dark:text-ink-50 mb-5">
+              <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-black leading-[1.05] tracking-normal text-ink-950 dark:text-ink-50 mb-5">
                 {t.processTitle}
               </h2>
               <p className="text-lg text-ink-700 dark:text-ink-300 leading-relaxed">{t.processIntro}</p>
@@ -316,7 +316,7 @@ export const Home: React.FC = () => {
             <div className="max-w-2xl">
               <Reveal>
                 <p className="eyebrow mb-4">{t.featuredEyebrow}</p>
-                <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-black leading-[1.05] tracking-tightest text-ink-950 dark:text-ink-50">
+                <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-black leading-[1.05] tracking-normal text-ink-950 dark:text-ink-50">
                   {t.featuredTitle}
                 </h2>
               </Reveal>
@@ -336,7 +336,7 @@ export const Home: React.FC = () => {
                 <Link
                   to="/gallery"
                   className={`group relative block overflow-hidden rounded-xl bg-ink-200 dark:bg-ink-800 ${
-                    idx === 0 ? 'md:col-span-2 md:row-span-2 aspect-square md:aspect-auto md:h-full' : 'aspect-[4/5]'
+                    idx === 0 ? 'lg:col-span-2 lg:row-span-2 aspect-square lg:aspect-auto lg:h-full' : 'aspect-[4/5]'
                   }`}
                 >
                   <img
@@ -376,7 +376,7 @@ export const Home: React.FC = () => {
           <div className="max-w-3xl mx-auto text-center">
             <Reveal>
               <p className="eyebrow mb-5">{t.finalEyebrow}</p>
-              <h2 className="font-display text-4xl md:text-6xl lg:text-7xl font-black leading-[1.05] tracking-tightest text-white mb-6">
+              <h2 className="font-display text-4xl md:text-6xl lg:text-7xl font-black leading-[1.05] tracking-normal text-white mb-6">
                 {t.finalTitle}
               </h2>
               <p className="text-lg md:text-xl text-ink-300 mb-10 leading-relaxed">{t.finalDesc}</p>
