@@ -1,31 +1,36 @@
 import { useState, useEffect, useRef } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useLanguage } from '../context/LanguageContext';
 import { CONTACT_CONFIG } from '../constants';
-import {
-  Logo,
-  DesktopMenu,
-  MobileMenu,
-  MobileMenuButton,
-} from './nav';
+import { Logo, MobileMenu, MobileMenuButton, CallButton } from './nav';
+import { UtilityBar } from './header/UtilityBar';
+import { MegaMenu } from './header/MegaMenu';
+import { LanguageSwitcher } from './LanguageSwitcher';
+import { ThemeToggle } from './ThemeToggle';
 
+/**
+ * Site header: dark utility bar (desktop) + main bar with logo, product
+ * category mega menu, language/theme and call CTA. Sticky, so pages no
+ * longer need to offset content for a fixed header.
+ */
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { content, language, setLanguage } = useLanguage();
+  const { pathname } = useLocation();
 
   const menuRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
-  // Handle scroll effect
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Handle click outside to close menu
+  // Close the mobile drawer on navigation
+  useEffect(() => setIsOpen(false), [pathname]);
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -38,63 +43,46 @@ export const Navbar = () => {
         setIsOpen(false);
       }
     };
-
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [isOpen]);
 
   const closeMenu = () => setIsOpen(false);
-
-  // Always solid background. The "transparent on hero" look caused white
-  // navbar text to disappear on inner pages that don't have a dark hero.
-  const navClasses = `fixed w-full z-40 transition-all duration-300 ${
-    scrolled
-      ? 'bg-white/95 dark:bg-ink-950/90 backdrop-blur-md border-b border-ink-200 dark:border-ink-800 py-2 shadow-sm'
-      : 'bg-white/95 dark:bg-ink-950/90 backdrop-blur-sm py-4'
-  }`;
-
   const spaceClass = language === 'he' ? 'space-x-reverse' : '';
 
   return (
-    <nav className={navClasses}>
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          <Logo
-            companyName={content.companyName}
-            scrolled={scrolled}
-            spaceClass={spaceClass}
-            onClick={closeMenu}
-          />
+    <header className={`sticky top-0 z-40 w-full transition-shadow ${scrolled ? 'shadow-md' : ''}`}>
+      <UtilityBar />
+      <div className="relative bg-white/95 dark:bg-ink-950/95 backdrop-blur-md border-b border-ink-300 dark:border-ink-800">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-stretch h-16 lg:h-[72px] gap-6">
+            <div className="flex items-center">
+              <Logo companyName={content.companyName} scrolled={scrolled} spaceClass={spaceClass} onClick={closeMenu} />
+            </div>
 
-          <DesktopMenu
-            navItems={content.nav}
-            scrolled={scrolled}
-            language={language}
-            onLanguageChange={setLanguage}
-            callNowLabel={content.buttons.callNow}
-            phoneNumber={CONTACT_CONFIG.phone}
-            spaceClass={spaceClass}
-          />
+            <MegaMenu />
 
-          <MobileMenuButton
-            isOpen={isOpen}
-            scrolled={scrolled}
-            language={language}
-            onLanguageChange={setLanguage}
-            onToggle={() => setIsOpen(!isOpen)}
-            buttonRef={buttonRef}
-          />
+            <div className="hidden lg:flex items-center gap-2">
+              <LanguageSwitcher currentLanguage={language} onLanguageChange={setLanguage} scrolled={scrolled} />
+              <ThemeToggle />
+              <CallButton label={content.buttons.callNow} phoneNumber={CONTACT_CONFIG.phone} />
+            </div>
+
+            <div className="flex items-center lg:hidden">
+              <MobileMenuButton
+                isOpen={isOpen}
+                scrolled={scrolled}
+                language={language}
+                onLanguageChange={setLanguage}
+                onToggle={() => setIsOpen(!isOpen)}
+                buttonRef={buttonRef}
+              />
+            </div>
+          </div>
         </div>
-      </div>
 
-      <MobileMenu
-        isOpen={isOpen}
-        navItems={content.nav}
-        onClose={closeMenu}
-        menuRef={menuRef}
-        callNowLabel={content.buttons.callNow}
-        phoneNumber={CONTACT_CONFIG.phone}
-      />
-    </nav>
+        <MobileMenu isOpen={isOpen} onClose={closeMenu} menuRef={menuRef} />
+      </div>
+    </header>
   );
 };

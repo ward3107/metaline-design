@@ -33,6 +33,8 @@ export const MobileMenuButton = ({
         onClick={onToggle}
         className="p-2 rounded-md text-ink-950 dark:text-ink-50"
         aria-label="Toggle menu"
+        aria-expanded={isOpen}
+        aria-controls="mobile-menu"
       >
         {isOpen ? <X size={28} /> : <Menu size={28} />}
       </button>

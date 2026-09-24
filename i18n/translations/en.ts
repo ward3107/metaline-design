@@ -72,6 +72,7 @@ export const en = {
       { id: 'pergolas', label: 'Pergolas' },
       { id: 'railings', label: 'Railings' },
       { id: 'cladding', label: 'Cladding' },
+      { id: 'bars', label: 'Bars' },
     ]
   },
   gallery: {
@@ -192,6 +193,7 @@ export const en = {
     { id: '6', category: 'pergolas', title: 'Electric Pergola', description: 'Retractable pergola with remote control', image: 'https://picsum.photos/600/400?random=15' },
     { id: '7', category: 'railings', title: 'Glass Railing', description: 'Embedded glass railing without pillars', image: 'https://picsum.photos/600/400?random=16' },
     { id: '8', category: 'cladding', title: 'Wood-Look Cladding', description: 'Aluminum cladding with high-quality wood finish', image: 'https://picsum.photos/600/400?random=17' },
+    { id: '9', category: 'bars', title: 'Decorative Window Bars', description: 'Clean-lined aluminum bars that keep the view open', image: 'https://picsum.photos/600/400?random=18' },
   ],
   galleryList: [
     { id: '1', category: 'residential', title: 'Villa in Savyon', image: 'https://picsum.photos/800/800?random=20' },

@@ -1,10 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { Reveal } from '../components/Reveal';
 import { useLanguage } from '../context/LanguageContext';
 
 export const Products: React.FC = () => {
-  const [activeCategory, setActiveCategory] = useState('all');
   const { content } = useLanguage();
+  // Category lives in the URL (?category=gates) so mega-menu links land filtered
+  const [params, setParams] = useSearchParams();
+  const requested = params.get('category') || 'all';
+  const activeCategory = content.products.categories.some((c: { id: string }) => c.id === requested)
+    ? requested
+    : 'all';
+  const setActiveCategory = (id: string) => setParams(id === 'all' ? {} : { category: id }, { replace: true });
 
   const filteredProducts = activeCategory === 'all'
     ? content.productsList
@@ -31,6 +38,7 @@ export const Products: React.FC = () => {
             <button
               key={cat.id}
               onClick={() => setActiveCategory(cat.id)}
+              aria-pressed={activeCategory === cat.id}
               className={`px-4 md:px-6 py-2 rounded-full text-sm md:text-base font-medium transition-colors ${
                 activeCategory === cat.id
                   ? 'bg-accent text-white shadow-md'

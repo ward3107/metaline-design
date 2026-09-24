@@ -72,6 +72,7 @@ export const he = {
       { id: 'pergolas', label: 'פרגולות' },
       { id: 'railings', label: 'מעקות' },
       { id: 'cladding', label: 'חיפויים' },
+      { id: 'bars', label: 'סורגים' },
     ]
   },
   gallery: {
@@ -192,6 +193,7 @@ export const he = {
     { id: '6', category: 'pergolas', title: 'פרגולה חשמלית', description: 'פרגולה נאספת עם שלט רחוק', image: 'https://picsum.photos/600/400?random=15' },
     { id: '7', category: 'railings', title: 'מעקה זכוכית', description: 'מעקה זכוכית שתולה ללא עמודים', image: 'https://picsum.photos/600/400?random=16' },
     { id: '8', category: 'cladding', title: 'חיפוי דמוי עץ', description: 'חיפוי אלומיניום בגמר דמוי עץ איכותי', image: 'https://picsum.photos/600/400?random=17' },
+    { id: '9', category: 'bars', title: 'סורג דקורטיבי לחלון', description: 'סורג אלומיניום בקווים נקיים שלא חוסם את הנוף', image: 'https://picsum.photos/600/400?random=18' },
   ],
   galleryList: [
     { id: '1', category: 'residential', title: 'וילה בסביון', image: 'https://picsum.photos/800/800?random=20' },

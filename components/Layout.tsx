@@ -2,7 +2,7 @@ import { useState, useEffect, ReactNode } from 'react';
 import { Navbar } from './Navbar';
 import { Footer } from './Footer';
 import { ArrowUp } from 'lucide-react';
-import { WhatsAppWidget } from './WhatsAppWidget';
+import { ContactRail } from './ContactRail';
 // AccessibilityWidget is now loaded via standalone JS (accessibility-widget.js)
 // for IS 5568 / WCAG 2.0 AA compliance
 import { CookieBanner } from './CookieBanner';
@@ -36,12 +36,12 @@ export const Layout = ({ children }: LayoutProps) => {
        </a>
 
       <Navbar />
-      <main id="main-content" className="flex-grow pt-16">
+      <main id="main-content" className="flex-grow">
         {children}
       </main>
       <Footer />
 
-      <WhatsAppWidget />
+      <ContactRail />
       {/* Accessibility Widget loaded via standalone JS in index.html */}
       <CookieBanner privacyPolicyUrl="/privacy-policy" />
       <PlaceholderBanner />
@@ -49,7 +49,7 @@ export const Layout = ({ children }: LayoutProps) => {
       {showTopBtn && (
         <button
           onClick={goToTop}
-          className="fixed bottom-44 left-4 md:bottom-44 md:left-6 p-3 rounded-full bg-white/95 dark:bg-ink-800 dark:text-white text-black ring-1 ring-black/10 dark:ring-white/10 shadow-lg hover:shadow-xl transition-shadow z-50"
+          className="fixed bottom-28 left-4 lg:bottom-24 lg:left-6 p-3 rounded-full bg-white/95 dark:bg-ink-800 dark:text-white text-black ring-1 ring-black/10 dark:ring-white/10 shadow-lg hover:shadow-xl transition-shadow z-50"
           aria-label="Back to top"
         >
           <ArrowUp size={24} />

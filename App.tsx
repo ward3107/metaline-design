@@ -13,16 +13,26 @@ import { RefundPolicy } from './pages/RefundPolicy';
 import { Disclaimer } from './pages/Disclaimer';
 import { AccessibilityStatement } from './pages/AccessibilityStatement';
 import { NotFound } from './pages/NotFound';
+import { Magazine } from './pages/Magazine';
+import { Article } from './pages/Article';
 import { ThemeProvider } from './context/ThemeContext';
 import { LanguageProvider } from './context/LanguageContext';
 
 // Scroll to top on route change
 const ScrollToTop = () => {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
 
   useEffect(() => {
+    // Support in-page anchors inside hash routes (e.g. /contact#form)
+    if (hash) {
+      const el = document.getElementById(hash.slice(1));
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        return;
+      }
+    }
     window.scrollTo(0, 0);
-  }, [pathname]);
+  }, [pathname, hash]);
 
   return null;
 };
@@ -40,6 +50,8 @@ const App = () => {
                 <Route path="/products" element={<Products />} />
                 <Route path="/gallery" element={<Gallery />} />
                 <Route path="/about" element={<About />} />
+                <Route path="/magazine" element={<Magazine />} />
+                <Route path="/magazine/:slug" element={<Article />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/privacy-policy" element={<PrivacyPolicy />} />
                 <Route path="/terms" element={<TermsOfUse />} />

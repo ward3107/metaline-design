@@ -127,7 +127,7 @@ export const Contact: React.FC = () => {
               <h2 className="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-2">{content.contact.formTitle}</h2>
               <p className="text-gray-600 dark:text-gray-400 mb-6 md:mb-8 text-sm md:text-base">{content.contact.formSubtitle}</p>
               
-              <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
+              <form id="form" onSubmit={handleSubmit} className="space-y-4 md:space-y-6 scroll-mt-32">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{content.contact.labels.name}</label>
                   <input

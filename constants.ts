@@ -54,7 +54,7 @@ export const NAV_LINKS: NavLink[] = [
 const UNSPLASH = 'https://images.unsplash.com/photo-';
 const Q = '?q=80&w=1200&auto=format&fit=crop';
 export const HERO_IMAGE = `${UNSPLASH}1746155885811-ace3b5afd12d?q=80&w=2400&auto=format&fit=crop`;
-const CATEGORY_IMAGE = {
+export const CATEGORY_IMAGE = {
   gates: `${UNSPLASH}1759355787286-f1c5fd456a0d${Q}`,
   fences: `${UNSPLASH}1769697694226-dcd646ca50c1${Q}`,
   pergolas: `${UNSPLASH}1775903961716-7c2cd1b932d8${Q}`,
@@ -62,7 +62,7 @@ const CATEGORY_IMAGE = {
   cladding: `${UNSPLASH}1598638567141-696be94b464a${Q}`,
   bars: `${UNSPLASH}1761542928043-503ab1870832${Q}`,
 } as const;
-const PROJECT_IMAGE = {
+export const PROJECT_IMAGE = {
   villaGate: `${UNSPLASH}1761347604632-944c4400093a${Q}`,
   techOffice: `${UNSPLASH}1623051786552-e46ef84e6c07${Q}`,
   penthouseBalcony: `${UNSPLASH}1776363116182-51694a04a1d5${Q}`,

@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@config "./tailwind.config.js";
 
 :root {
   color-scheme: light dark;
@@ -93,6 +94,11 @@ body.underline-links a {
 #a11y-panel {
   right: auto !important;
   left: 24px !important;
+}
+/* Mobile: lift the a11y trigger above the sticky contact bar (ContactRail) */
+@media (max-width: 1023px) {
+  #a11y-trigger { bottom: 96px !important; }
+  #a11y-panel { bottom: 160px !important; }
 }
 @media (max-width: 400px) {
   #a11y-trigger { left: 16px !important; }

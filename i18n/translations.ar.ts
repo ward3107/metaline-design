@@ -77,6 +77,7 @@ export const TRANSLATIONS_AR = {
       { id: 'pergolas', label: 'المظلات' },
       { id: 'railings', label: 'الدرابزين' },
       { id: 'cladding', label: 'الواجهات' },
+      { id: 'bars', label: 'القضبان' },
     ]
   },
   gallery: {
@@ -197,6 +198,7 @@ export const TRANSLATIONS_AR = {
     { id: '6', category: 'pergolas', title: 'مظلة كهربائية', description: 'مظلة قابلة للسحب مع جهاز تحكم عن بعد', image: 'https://picsum.photos/600/400?random=15' },
     { id: '7', category: 'railings', title: 'درابزين زجاجي', description: 'درابزين زجاجي مدمج بدون أعمدة', image: 'https://picsum.photos/600/400?random=16' },
     { id: '8', category: 'cladding', title: 'واجهة على شكل خشب', description: 'واجهة ألومنيوم بلمسة خشبية عالية الجودة', image: 'https://picsum.photos/600/400?random=17' },
+    { id: '9', category: 'bars', title: 'قضبان نوافذ زخرفية', description: 'قضبان ألومنيوم بخطوط نظيفة لا تحجب المنظر', image: 'https://picsum.photos/600/400?random=18' },
   ],
   galleryList: [
     { id: '1', category: 'residential', title: 'فيلا في سافيون', image: 'https://picsum.photos/800/800?random=20' },
