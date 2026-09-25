@@ -9,8 +9,16 @@ import {
   Ruler,
   Hammer,
   Truck,
+  ShieldCheck,
+  Gem,
+  Factory,
+  MapPin,
+  PenTool,
+  HardHat,
 } from 'lucide-react';
 import { Reveal } from '../components/Reveal';
+import { ArticleCard } from '../components/magazine/ArticleCard';
+import { ARTICLES } from '../data/articles';
 import { useLanguage } from '../context/LanguageContext';
 import { CONTACT_CONFIG, GALLERY_ITEMS, HERO_IMAGE, WHATSAPP_NUMBER } from '../constants';
 
@@ -131,6 +139,95 @@ const sectionCopy = {
   },
 } as const;
 
+// Copy for the Trellidor-style sections: company advantages, the professional
+// (B2B) audience, and the latest-articles teaser.
+const moreCopy = {
+  he: {
+    advEyebrow: 'למה Metaline',
+    advTitle: 'יתרונות החברה.',
+    advantages: [
+      { icon: ShieldCheck, title: 'בקרת איכות', desc: 'כל פריט עובר בדיקה קפדנית לפני שהוא יוצא מבית המלאכה.' },
+      { icon: Gem, title: 'עיצוב ויוקרה', desc: 'קו נקי ומדויק שמשלב אסתטיקה עם עמידות לאורך שנים.' },
+      { icon: Factory, title: 'ייצור בישראל', desc: 'מיוצר אצלנו בחולון, בשליטה מלאה על האיכות ולוחות הזמנים.' },
+      { icon: MapPin, title: 'פריסה ארצית', desc: 'מודדים, מייצרים ומתקינים בכל רחבי הארץ.' },
+    ],
+    proEyebrow: 'לאנשי מקצוע',
+    proTitle: 'עובדים עם אדריכלים וקבלנים.',
+    proDesc: 'ליווי מקצועי, פרטי חיבור ותמחור לפרויקטים — משלב התכנון ועד האספקה לאתר.',
+    proCards: [
+      { icon: PenTool, title: 'אדריכלים ומעצבים', desc: 'פרטי חיבור, קבצי DWG ותכנון מותאם למפרט שלכם.', cta: 'להצטרפות' },
+      { icon: HardHat, title: 'קבלנים ויזמים', desc: 'תמחור לפרויקטים, עמידה בלוחות זמנים ואספקה מסודרת לאתר.', cta: 'לשיתוף פעולה' },
+    ],
+    artEyebrow: 'מהמגזין',
+    artTitle: 'טיפים והשראה לפרויקט הבא.',
+    artCta: 'לכל הכתבות',
+    readMore: 'לקריאת הכתבה',
+  },
+  ar: {
+    advEyebrow: 'لماذا Metaline',
+    advTitle: 'مزايا الشركة.',
+    advantages: [
+      { icon: ShieldCheck, title: 'مراقبة الجودة', desc: 'كل قطعة تخضع لفحص دقيق قبل خروجها من الورشة.' },
+      { icon: Gem, title: 'تصميم وفخامة', desc: 'خط نظيف ودقيق يجمع بين الجمال والمتانة لسنوات.' },
+      { icon: Factory, title: 'إنتاج إسرائيلي', desc: 'مُصنّع لدينا في حولون، بتحكم كامل بالجودة والمواعيد.' },
+      { icon: MapPin, title: 'تغطية في جميع أنحاء البلاد', desc: 'نقيس ونصنع ونركّب في كل أنحاء البلاد.' },
+    ],
+    proEyebrow: 'لأصحاب المهن',
+    proTitle: 'نعمل مع المهندسين والمقاولين.',
+    proDesc: 'مرافقة مهنية، تفاصيل ربط وتسعير للمشاريع — من التخطيط حتى التوريد للموقع.',
+    proCards: [
+      { icon: PenTool, title: 'مهندسون ومصممون', desc: 'تفاصيل ربط، ملفات DWG وتخطيط مطابق لمواصفاتكم.', cta: 'للانضمام' },
+      { icon: HardHat, title: 'مقاولون ومستثمرون', desc: 'تسعير للمشاريع، الالتزام بالمواعيد وتوريد منظّم للموقع.', cta: 'للتعاون' },
+    ],
+    artEyebrow: 'من المجلة',
+    artTitle: 'نصائح وإلهام لمشروعك القادم.',
+    artCta: 'كل المقالات',
+    readMore: 'اقرأ المقال',
+  },
+  en: {
+    advEyebrow: 'Why Metaline',
+    advTitle: 'Company advantages.',
+    advantages: [
+      { icon: ShieldCheck, title: 'Quality control', desc: 'Every item is rigorously checked before it leaves the workshop.' },
+      { icon: Gem, title: 'Design & luxury', desc: 'A clean, precise line that pairs aesthetics with lasting durability.' },
+      { icon: Factory, title: 'Made in Israel', desc: 'Built in our Holon workshop, with full control over quality and timelines.' },
+      { icon: MapPin, title: 'Nationwide', desc: 'We measure, manufacture and install across the country.' },
+    ],
+    proEyebrow: 'For professionals',
+    proTitle: 'Working with architects & contractors.',
+    proDesc: 'Professional support, connection details and project pricing — from design through delivery to site.',
+    proCards: [
+      { icon: PenTool, title: 'Architects & designers', desc: 'Connection details, DWG files and planning matched to your spec.', cta: 'Join' },
+      { icon: HardHat, title: 'Contractors & developers', desc: 'Project pricing, on-time delivery and organized supply to site.', cta: 'Partner with us' },
+    ],
+    artEyebrow: 'From the magazine',
+    artTitle: 'Tips & inspiration for your next project.',
+    artCta: 'All articles',
+    readMore: 'Read article',
+  },
+  ru: {
+    advEyebrow: 'Почему Metaline',
+    advTitle: 'Преимущества компании.',
+    advantages: [
+      { icon: ShieldCheck, title: 'Контроль качества', desc: 'Каждое изделие тщательно проверяется перед выходом из цеха.' },
+      { icon: Gem, title: 'Дизайн и роскошь', desc: 'Чистая, точная линия — эстетика и долговечность на годы.' },
+      { icon: Factory, title: 'Производство в Израиле', desc: 'Изготавливаем в Холоне, полностью контролируя качество и сроки.' },
+      { icon: MapPin, title: 'По всей стране', desc: 'Замеряем, производим и монтируем по всему Израилю.' },
+    ],
+    proEyebrow: 'Профессионалам',
+    proTitle: 'Работаем с архитекторами и подрядчиками.',
+    proDesc: 'Профессиональное сопровождение, узлы примыкания и расчёт проектов — от проекта до поставки на объект.',
+    proCards: [
+      { icon: PenTool, title: 'Архитекторы и дизайнеры', desc: 'Узлы, файлы DWG и планирование под ваш спецификатор.', cta: 'Присоединиться' },
+      { icon: HardHat, title: 'Подрядчики и застройщики', desc: 'Расчёт проектов, соблюдение сроков и поставка на объект.', cta: 'Сотрудничество' },
+    ],
+    artEyebrow: 'Из журнала',
+    artTitle: 'Идеи и советы для вашего проекта.',
+    artCta: 'Все статьи',
+    readMore: 'Читать',
+  },
+} as const;
+
 type SectionCopy = (typeof sectionCopy)[keyof typeof sectionCopy];
 
 export const Home: React.FC = () => {
@@ -138,8 +235,10 @@ export const Home: React.FC = () => {
   const Arrow = language === 'he' || language === 'ar' ? ArrowLeft : ArrowRight;
   const isRTL = language === 'he' || language === 'ar';
   const t: SectionCopy = sectionCopy[language as keyof typeof sectionCopy] || sectionCopy.en;
+  const m = moreCopy[language as keyof typeof moreCopy] || moreCopy.en;
 
   const featuredProjects = GALLERY_ITEMS.slice(0, 4);
+  const latestArticles = ARTICLES.slice(0, 3);
 
   return (
     <div className="bg-ink-50 dark:bg-ink-950 text-ink-950 dark:text-ink-50">
@@ -273,6 +372,33 @@ export const Home: React.FC = () => {
         </div>
       </section>
 
+      {/* ──────────────────────── ADVANTAGES ─────────────────────── */}
+      <section className="bg-ink-100 dark:bg-ink-900 py-20 md:py-28 border-t border-ink-200 dark:border-ink-800">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl mb-14">
+            <Reveal>
+              <p className="eyebrow mb-4">{m.advEyebrow}</p>
+              <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-black leading-[1.05] tracking-normal text-ink-950 dark:text-ink-50">
+                {m.advTitle}
+              </h2>
+            </Reveal>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
+            {m.advantages.map((a, i) => (
+              <Reveal key={i} width="100%">
+                <div className="h-full">
+                  <div className="w-14 h-14 rounded-xl bg-accent/10 text-accent flex items-center justify-center mb-5">
+                    <a.icon size={26} />
+                  </div>
+                  <h3 className="font-display text-xl font-bold text-ink-950 dark:text-ink-50 mb-2">{a.title}</h3>
+                  <p className="text-ink-700 dark:text-ink-300 leading-relaxed">{a.desc}</p>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ─────────────────────────── PROCESS ─────────────────────────── */}
       <section className="bg-white dark:bg-ink-950 py-20 md:py-28">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -361,6 +487,73 @@ export const Home: React.FC = () => {
         </div>
       </section>
 
+      {/* ───────────────────── PROFESSIONAL AUDIENCE ───────────────────── */}
+      <section className="bg-white dark:bg-ink-950 py-20 md:py-28">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl mb-14">
+            <Reveal>
+              <p className="eyebrow mb-4">{m.proEyebrow}</p>
+              <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-black leading-[1.05] tracking-normal text-ink-950 dark:text-ink-50 mb-5">
+                {m.proTitle}
+              </h2>
+              <p className="text-lg text-ink-700 dark:text-ink-300 leading-relaxed">{m.proDesc}</p>
+            </Reveal>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {m.proCards.map((c, i) => (
+              <Reveal key={i} width="100%">
+                <Link
+                  to="/contact"
+                  className="group flex items-start gap-5 h-full p-7 md:p-8 rounded-2xl bg-ink-50 dark:bg-ink-900 border border-ink-200 dark:border-ink-800 hover:border-accent transition-colors"
+                >
+                  <div className="w-12 h-12 shrink-0 rounded-xl bg-accent text-white flex items-center justify-center">
+                    <c.icon size={24} />
+                  </div>
+                  <div>
+                    <h3 className="font-display text-xl font-bold text-ink-950 dark:text-ink-50 mb-2">{c.title}</h3>
+                    <p className="text-ink-700 dark:text-ink-300 leading-relaxed mb-3">{c.desc}</p>
+                    <span className="inline-flex items-center gap-2 text-accent font-semibold">
+                      {c.cta}
+                      <Arrow size={16} className="transition-transform group-hover:translate-x-1 rtl:group-hover:-translate-x-1" />
+                    </span>
+                  </div>
+                </Link>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ────────────────────── LATEST ARTICLES ────────────────────── */}
+      <section className="bg-ink-50 dark:bg-ink-900 py-20 md:py-28">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12 md:mb-16">
+            <div className="max-w-2xl">
+              <Reveal>
+                <p className="eyebrow mb-4">{m.artEyebrow}</p>
+                <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-black leading-[1.05] tracking-normal text-ink-950 dark:text-ink-50">
+                  {m.artTitle}
+                </h2>
+              </Reveal>
+            </div>
+            <Link
+              to="/magazine"
+              className="inline-flex items-center gap-2 self-start md:self-end text-accent hover:text-accent-hover font-semibold transition-colors"
+            >
+              {m.artCta}
+              <Arrow size={18} />
+            </Link>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {latestArticles.map((a) => (
+              <Reveal key={a.slug} width="100%">
+                <ArticleCard article={a} readMoreLabel={m.readMore} />
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ────────────────────────── FINAL CTA ────────────────────────── */}
       <section className="relative bg-ink-950 text-white py-20 md:py-32 overflow-hidden">
         <div className="absolute inset-0 opacity-20">
@@ -368,7 +561,7 @@ export const Home: React.FC = () => {
             className="absolute inset-0"
             style={{
               backgroundImage:
-                'radial-gradient(circle at 20% 30%, rgba(245,158,11,0.25), transparent 40%), radial-gradient(circle at 80% 70%, rgba(245,158,11,0.18), transparent 45%)',
+                'radial-gradient(circle at 20% 30%, rgba(247,213,56,0.22), transparent 40%), radial-gradient(circle at 80% 70%, rgba(120,174,239,0.18), transparent 45%)',
             }}
           />
         </div>
@@ -383,7 +576,7 @@ export const Home: React.FC = () => {
               <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
                 <Link
                   to="/contact"
-                  className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent-hover text-ink-950 font-bold px-8 py-4 rounded-md transition-colors w-full sm:w-auto"
+                  className="inline-flex items-center justify-center gap-2 bg-gold hover:bg-gold-hover text-accent font-bold px-8 py-4 rounded-md transition-colors w-full sm:w-auto"
                 >
                   {t.finalFormCta}
                   <Arrow size={18} />
