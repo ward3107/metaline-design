@@ -15,6 +15,8 @@ import {
   MapPin,
   PenTool,
   HardHat,
+  FileText,
+  Download,
 } from 'lucide-react';
 import { Reveal } from '../components/Reveal';
 import { ArticleCard } from '../components/magazine/ArticleCard';
@@ -162,6 +164,15 @@ const moreCopy = {
     artTitle: 'טיפים והשראה לפרויקט הבא.',
     artCta: 'לכל הכתבות',
     readMore: 'לקריאת הכתבה',
+    catEyebrow: 'להורדה',
+    catTitle: 'הקטלוגים של Metaline.',
+    catDesc: 'כל מה שצריך לדעת על החומרים, הדגמים והמידות — במסמך אחד.',
+    catBtn: 'לקבלת הקטלוג',
+    catalogs: [
+      { title: 'קטלוג אלומיניום', desc: 'סדרות, גימורים וצבעים.' },
+      { title: 'קטלוג מוצרים', desc: 'שערים, גדרות, פרגולות ומעקות.' },
+      { title: 'קטלוג לקבלנים', desc: 'מפרטים, פרטי חיבור ותמחור.' },
+    ],
   },
   ar: {
     advEyebrow: 'لماذا Metaline',
@@ -183,6 +194,15 @@ const moreCopy = {
     artTitle: 'نصائح وإلهام لمشروعك القادم.',
     artCta: 'كل المقالات',
     readMore: 'اقرأ المقال',
+    catEyebrow: 'للتحميل',
+    catTitle: 'كتالوجات Metaline.',
+    catDesc: 'كل ما تحتاج معرفته عن المواد والموديلات والمقاسات — في مستند واحد.',
+    catBtn: 'للحصول على الكتالوج',
+    catalogs: [
+      { title: 'كتالوج الألمنيوم', desc: 'السلاسل والتشطيبات والألوان.' },
+      { title: 'كتالوج المنتجات', desc: 'بوابات، أسوار، برجولات ودرابزين.' },
+      { title: 'كتالوج المقاولين', desc: 'مواصفات، تفاصيل ربط وتسعير.' },
+    ],
   },
   en: {
     advEyebrow: 'Why Metaline',
@@ -204,6 +224,15 @@ const moreCopy = {
     artTitle: 'Tips & inspiration for your next project.',
     artCta: 'All articles',
     readMore: 'Read article',
+    catEyebrow: 'Downloads',
+    catTitle: 'Metaline catalogs.',
+    catDesc: 'Everything you need on materials, models and sizes — in one document.',
+    catBtn: 'Get the catalog',
+    catalogs: [
+      { title: 'Aluminum catalog', desc: 'Series, finishes and colors.' },
+      { title: 'Product catalog', desc: 'Gates, fences, pergolas and railings.' },
+      { title: 'Contractors catalog', desc: 'Specs, connection details and pricing.' },
+    ],
   },
   ru: {
     advEyebrow: 'Почему Metaline',
@@ -225,6 +254,15 @@ const moreCopy = {
     artTitle: 'Идеи и советы для вашего проекта.',
     artCta: 'Все статьи',
     readMore: 'Читать',
+    catEyebrow: 'Загрузки',
+    catTitle: 'Каталоги Metaline.',
+    catDesc: 'Всё о материалах, моделях и размерах — в одном документе.',
+    catBtn: 'Получить каталог',
+    catalogs: [
+      { title: 'Каталог алюминия', desc: 'Серии, отделки и цвета.' },
+      { title: 'Каталог продукции', desc: 'Ворота, заборы, перголы и перила.' },
+      { title: 'Каталог для подрядчиков', desc: 'Спецификации, узлы и цены.' },
+    ],
   },
 } as const;
 
@@ -386,7 +424,7 @@ export const Home: React.FC = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
             {m.advantages.map((a, i) => (
               <Reveal key={i} width="100%">
-                <div className="h-full">
+                <div className="h-full p-7 rounded-2xl bg-white dark:bg-ink-950 border border-ink-200 dark:border-ink-800 transition-colors hover:border-accent">
                   <div className="w-14 h-14 rounded-xl bg-accent/10 text-accent flex items-center justify-center mb-5">
                     <a.icon size={26} />
                   </div>
@@ -548,6 +586,44 @@ export const Home: React.FC = () => {
             {latestArticles.map((a) => (
               <Reveal key={a.slug} width="100%">
                 <ArticleCard article={a} readMoreLabel={m.readMore} />
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ───────────────────────────  CATALOGS ─────────────────────────── */}
+      <section className="bg-white dark:bg-ink-950 py-20 md:py-28 border-t border-ink-200 dark:border-ink-800">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl mb-14">
+            <Reveal>
+              <p className="eyebrow mb-4">{m.catEyebrow}</p>
+              <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-black leading-[1.05] tracking-normal text-ink-950 dark:text-ink-50 mb-5">
+                {m.catTitle}
+              </h2>
+              <p className="text-lg text-ink-700 dark:text-ink-300 leading-relaxed">{m.catDesc}</p>
+            </Reveal>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {m.catalogs.map((c, i) => (
+              <Reveal key={i} width="100%">
+                <div className="flex flex-col h-full p-7 rounded-2xl bg-ink-50 dark:bg-ink-900 border border-ink-200 dark:border-ink-800">
+                  <div className="w-12 h-12 rounded-xl bg-accent/10 text-accent flex items-center justify-center mb-5">
+                    <FileText size={24} />
+                  </div>
+                  <h3 className="font-display text-xl font-bold text-ink-950 dark:text-ink-50 mb-2">{c.title}</h3>
+                  <p className="text-ink-700 dark:text-ink-300 leading-relaxed mb-6 flex-grow">{c.desc}</p>
+                  {/* TODO(launch): swap this to a direct PDF download once the
+                      catalog files exist in public/catalogs/ (add the `download`
+                      attribute and point href at the file). */}
+                  <Link
+                    to="/contact"
+                    className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent-hover text-white font-semibold px-5 py-3 rounded-md transition-colors"
+                  >
+                    <Download size={18} />
+                    {m.catBtn}
+                  </Link>
+                </div>
               </Reveal>
             ))}
           </div>
