@@ -144,7 +144,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ variant, showHeading = true,
         type="checkbox"
         checked={consents[key]}
         onChange={(e) => setConsents((s) => ({ ...s, [key]: e.target.checked }))}
-        className="mt-0.5 h-5 w-5 shrink-0 accent-[#3b82f6]"
+        className="mt-0.5 h-5 w-5 shrink-0 accent-[#104f9a]"
         aria-invalid={key === 'privacy' && errors.privacy ? true : undefined}
       />
       <span>{label}</span>
@@ -197,7 +197,7 @@ export const LeadForm: React.FC<LeadFormProps> = ({ variant, showHeading = true,
         className={`h-12 rounded-full font-bold transition-colors ${
           compact
             ? 'border-2 border-ink-950 dark:border-white text-ink-950 dark:text-white hover:bg-ink-950 hover:text-white dark:hover:bg-white dark:hover:text-ink-950'
-            : 'self-start px-10 bg-accent-hover hover:bg-blue-700 text-white'
+            : 'self-start px-10 bg-gold hover:bg-gold-hover text-accent'
         }`}
       >
         {submitLabel}

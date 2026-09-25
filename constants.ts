@@ -2,17 +2,17 @@ import { Home, Grid, Image, Info, Phone, Shield, Building, Warehouse, Lock, Sun,
 import { Service, Product, GalleryItem, NavLink } from './types';
 
 // Company Configuration
-export const COMPANY_NAME = "אנטון";
+export const COMPANY_NAME = "Metaline";
 export const COMPANY_TAGLINE = "מסגריה אומנותית · שערים, גדרות, מעקות, פרגולות וסורגים";
 
 // Contact Information
 // TODO(launch): Replace placeholder values before going live. The sentinels
-// (phone "*5555", email "info@anton-aluminum.com") are detected by the
+// (phone "*5555", email "info@metaline.com") are detected by the
 // dev-mode PlaceholderBanner; do not change them to other fakes — replace
 // with real values.
 export const CONTACT_CONFIG = {
   phone: '*5555',
-  email: 'info@anton-aluminum.com',
+  email: 'info@metaline.com',
   address: {
     street: 'המלאכה 12',
     city: 'חולון',

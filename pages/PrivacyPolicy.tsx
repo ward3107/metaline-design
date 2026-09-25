@@ -257,13 +257,13 @@ export const PrivacyPolicy: React.FC = () => {
                       </li>
                       <li className="flex items-start gap-3">
                         <Mail size={18} className="text-accent mt-0.5 shrink-0" />
-                        <a href="mailto:info@anton-aluminum.com" className="text-accent hover:underline">
+                        <a href="mailto:info@metaline.com" className="text-accent hover:underline">
                           {t.sections.intro.controller.email}
                         </a>
                       </li>
                       <li className="flex items-start gap-3">
                         <Globe2 size={18} className="text-accent mt-0.5 shrink-0" />
-                        <a href="https://anton-aluminum.co.il" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
+                        <a href="https://metaline.co.il" target="_blank" rel="noopener noreferrer" className="text-accent hover:underline">
                           {t.sections.intro.controller.website}
                         </a>
                       </li>

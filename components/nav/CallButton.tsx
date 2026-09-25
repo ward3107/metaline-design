@@ -7,7 +7,7 @@ interface CallButtonProps {
 }
 
 export const CallButton = ({ label, phoneNumber, variant = 'desktop' }: CallButtonProps) => {
-  const baseClasses = 'bg-accent-hover hover:bg-blue-700 text-white font-medium transition-colors flex items-center gap-2';
+  const baseClasses = 'bg-accent hover:bg-accent-hover text-white font-medium transition-colors flex items-center gap-2';
 
   if (variant === 'mobile') {
     return (

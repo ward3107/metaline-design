@@ -12,25 +12,31 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Rubik', 'sans-serif'],
-        display: ['Rubik', 'sans-serif'],
+        sans: ['Heebo', 'sans-serif'],
+        display: ['Heebo', 'sans-serif'],
       },
       letterSpacing: {
         tightest: '-0.04em',
       },
       colors: {
-        // Cold-steel palette. Slate neutrals + steel-blue accent — reads as
-        // a serious metalwork ("מסגריה") shop, not a warm interiors brand.
-        // Existing components use `primary` and `accent`; we redefine those
-        // tokens so the restyle propagates without renaming every class.
+        // Trellidor-inspired palette: confident royal blue + slate greys, with
+        // a restrained gold as the single signature accent. Existing components
+        // reference `primary` / `accent`, so redefining these tokens propagates
+        // the restyle without renaming classes.
         primary: {
-          DEFAULT: '#0f172a', // slate-900 — page surface dark
-          light: '#1e293b',   // slate-800
+          DEFAULT: '#14223f', // deep navy — dark surfaces
+          light: '#24346c',   // indigo-navy
         },
         accent: {
-          DEFAULT: '#3b82f6', // blue-500 — steel-blue accent
-          hover: '#2563eb',   // blue-600
+          DEFAULT: '#104f9a', // Trellidor royal blue — links, buttons, eyebrows
+          hover: '#0d3f7c',   // darker blue on hover
         },
+        // Signature gold accent (Trellidor CTA colour); use sparingly.
+        gold: {
+          DEFAULT: '#f7d538',
+          hover: '#e9c21f',
+        },
+        sky: '#78aeef', // soft secondary blue
         // Semantic palette for new components. Aliased to `ink` so existing
         // ink-* classes from the previous iteration keep compiling, but the
         // color values are now slate.

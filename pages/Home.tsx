@@ -18,7 +18,7 @@ import { CONTACT_CONFIG, GALLERY_ITEMS, HERO_IMAGE, WHATSAPP_NUMBER } from '../c
 // existing translations don't cover. Hebrew is primary; others fall back.
 const sectionCopy = {
   he: {
-    eyebrow: 'אנטון · מסגריה אומנותית',
+    eyebrow: 'Metaline · מסגריה אומנותית',
     secondaryCta: 'התקשרו עכשיו',
     whatsapp: 'דברו איתנו בוואטסאפ',
     stats: [
@@ -46,7 +46,7 @@ const sectionCopy = {
     finalFormCta: 'מלאו טופס קצר',
   },
   ar: {
-    eyebrow: 'أنتون · أعمال حدادة',
+    eyebrow: 'Metaline · أعمال حدادة',
     secondaryCta: 'اتصل الآن',
     whatsapp: 'تحدث معنا على واتساب',
     stats: [
@@ -74,7 +74,7 @@ const sectionCopy = {
     finalFormCta: 'املأ نموذجًا قصيرًا',
   },
   en: {
-    eyebrow: 'Anton · Custom Metalwork',
+    eyebrow: 'Metaline · Custom Metalwork',
     secondaryCta: 'Call us',
     whatsapp: 'Chat on WhatsApp',
     stats: [
@@ -161,12 +161,12 @@ export const Home: React.FC = () => {
         <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 pb-12 md:pb-24 pt-24 md:pt-32">
           <div className="max-w-3xl">
             <Reveal>
-              <p className="eyebrow text-accent mb-4 md:mb-5">{t.eyebrow}</p>
+              <p className="eyebrow mb-4 md:mb-5" style={{ color: '#78aeef' }}>{t.eyebrow}</p>
             </Reveal>
             <Reveal>
               <h1 className="font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black leading-[1.08] md:leading-[1.05] tracking-normal text-white mb-5 md:mb-6">
                 {content.home.heroTitle}{' '}
-                <span className="text-accent">{content.home.heroHighlight}</span>.
+                <span style={{ color: '#78aeef' }}>{content.home.heroHighlight}</span>.
               </h1>
             </Reveal>
             <Reveal>
@@ -178,7 +178,7 @@ export const Home: React.FC = () => {
               <div className={`flex flex-col sm:flex-row gap-3 ${isRTL ? 'sm:justify-start' : 'sm:justify-start'}`}>
                 <Link
                   to="/contact"
-                  className="inline-flex items-center justify-center gap-2 bg-accent hover:bg-accent-hover text-ink-950 font-bold px-7 py-4 rounded-md transition-colors"
+                  className="inline-flex items-center justify-center gap-2 bg-gold hover:bg-gold-hover text-accent font-bold px-7 py-4 rounded-md transition-colors"
                 >
                   {content.home.ctaButton}
                   <Arrow size={18} />

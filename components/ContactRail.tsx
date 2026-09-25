@@ -34,14 +34,14 @@ export const ContactRail = () => {
         <a href={wa} target="_blank" rel="noopener noreferrer" aria-label={r.whatsappLabel} title={r.whatsapp} className={`${railBtn} bg-[#1E7A4C] text-white`}>
           <WhatsAppIcon />
         </a>
-        <Link to="/contact" aria-label={r.leaveDetails} title={r.leaveDetails} className={`${railBtn} bg-accent-hover text-white`}>
+        <Link to="/contact" aria-label={r.leaveDetails} title={r.leaveDetails} className={`${railBtn} bg-gold text-accent`}>
           <Mail size={20} />
         </Link>
       </div>
 
       {/* Mobile sticky bottom bar */}
       <div className="lg:hidden fixed bottom-0 inset-x-0 z-30 bg-white/95 dark:bg-ink-950/95 backdrop-blur border-t border-ink-300 dark:border-ink-800 px-3 py-2.5 pb-[max(0.625rem,env(safe-area-inset-bottom))] flex items-center gap-2">
-        <Link to="/contact" className="flex-1 h-12 rounded-full bg-accent-hover text-white font-bold flex items-center justify-center gap-1.5 text-sm whitespace-nowrap">
+        <Link to="/contact" className="flex-1 h-12 rounded-full bg-gold text-accent font-bold flex items-center justify-center gap-1.5 text-sm whitespace-nowrap">
           <CalendarDays size={16} aria-hidden="true" className="hidden min-[400px]:block" />
           {r.bookMeeting}
         </Link>

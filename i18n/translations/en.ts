@@ -2,7 +2,7 @@ import { Home, Shield, Building, Warehouse, Lock, Sun, Ruler } from 'lucide-reac
 
 export const en = {
   direction: 'ltr',
-  companyName: "Anton",
+  companyName: "Metaline",
   tagline: "Custom Metalwork · Gates, Fences, Railings, Pergolas & Bars",
   nav: [
     { path: '/', label: 'Home' },
@@ -85,10 +85,10 @@ export const en = {
     }
   },
   about: {
-    title: 'About Anton',
+    title: 'About Metaline',
     subtitle: 'Since 2005, we have been leading the aluminum and steel industry in Israel with new standards of quality, service, and innovation.',
     storyTitle: 'Our Story',
-    storyP1: '"Anton" was founded out of a passion for aesthetics and practicality in the construction world. What started as a small workshop grew to become one of the leading companies in aluminum and steel solutions for residential and industrial use.',
+    storyP1: '"Metaline" was founded out of a passion for aesthetics and practicality in the construction world. What started as a small workshop grew to become one of the leading companies in aluminum and steel solutions for residential and industrial use.',
     storyP2: 'We believe that the home is a person\'s fortress, so every product leaving our factory undergoes strict quality control. Our gates, fences, and pergolas are not just safety and shading products - they are an integral part of home design.',
     storyP3: 'Our team consists of certified engineers, designers, and installers with decades of experience, committed to giving every customer the most precise solution for their needs.',
     valuesTitle: 'Our Values',

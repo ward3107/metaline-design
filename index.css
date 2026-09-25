@@ -12,20 +12,20 @@ html {
 }
 
 body {
-  font-family: 'Rubik', sans-serif;
+  font-family: 'Heebo', sans-serif;
   overflow-x: hidden;
   background-color: #f8fafc;
 }
 
 html.dark body {
-  background-color: #0f172a;
+  background-color: #14223f;
 }
 
 /* Display headings: keep default letter-spacing — Hebrew script doesn't
    render well with negative tracking, and the heavy weights already feel
    confident without it. */
 .font-display {
-  font-family: 'Rubik', sans-serif;
+  font-family: 'Heebo', sans-serif;
   font-feature-settings: 'ss01' on;
 }
 
@@ -58,7 +58,7 @@ html.dark body {
 
 /* Accessibility focus styles — steel-blue to match brand */
 :focus-visible {
-  outline: 3px solid #3b82f6;
+  outline: 3px solid #104f9a;
   outline-offset: 2px;
 }
 
@@ -80,7 +80,7 @@ body.underline-links a {
   letter-spacing: 0.25em;
   font-size: 0.75rem;
   font-weight: 600;
-  color: #3b82f6;
+  color: #104f9a;
 }
 
 /* Force the standalone accessibility widget to the left side, always.

@@ -63,7 +63,7 @@ export const RefundPolicy: React.FC = () => {
       s4: {
         title: '4. תהליך החזר כספי',
         steps: [
-          { num: 1, title: 'שליחת בקשה', desc: 'שלחו מייל לכתובת info@anton-aluminum.com עם הנושא: "בקשת ביטול"' },
+          { num: 1, title: 'שליחת בקשה', desc: 'שלחו מייל לכתובת info@metaline.com עם הנושא: "בקשת ביטול"' },
           { num: 2, title: 'פרטים נדרשים', desc: 'מספר הזמנה, תאריך רכישה, סיבת הביטול (אופציונלי)' },
           { num: 3, title: 'אישור ובדיקה', desc: 'נבדוק את הבקשה ונחזור אליכם תוך 3 ימי עסקים' },
           { num: 4, title: 'קבלת ההחזר', desc: 'ההחזר יתבצע תוך 14 ימי עסקים לאמצעי התשלום המקורי' },
@@ -145,7 +145,7 @@ export const RefundPolicy: React.FC = () => {
       s4: {
         title: '4. عملية استرداد الأموال',
         steps: [
-          { num: 1, title: 'إرسال الطلب', desc: 'أرسل بريداً إلكترونياً إلى info@anton-aluminum.com بموضوع: "طلب إلغاء"' },
+          { num: 1, title: 'إرسال الطلب', desc: 'أرسل بريداً إلكترونياً إلى info@metaline.com بموضوع: "طلب إلغاء"' },
           { num: 2, title: 'التفاصيل المطلوبة', desc: 'رقم الطلب، تاريخ الشراء، سبب الإلغاء (اختياري)' },
           { num: 3, title: 'الموافقة والمراجعة', desc: 'سنراجع الطلب ونرد عليك خلال 3 أيام عمل' },
           { num: 4, title: 'استلام الاسترداد', desc: 'سيتم الاسترداد خلال 14 يوماً عمل إلى طريقة الدفع الأصلية' },
@@ -227,7 +227,7 @@ export const RefundPolicy: React.FC = () => {
       s4: {
         title: '4. Refund Process',
         steps: [
-          { num: 1, title: 'Send Request', desc: 'Email info@anton-aluminum.com with subject: "Cancellation Request"' },
+          { num: 1, title: 'Send Request', desc: 'Email info@metaline.com with subject: "Cancellation Request"' },
           { num: 2, title: 'Required Details', desc: 'Order number, purchase date, reason for cancellation (optional)' },
           { num: 3, title: 'Review & Approval', desc: 'We will review the request and respond within 3 business days' },
           { num: 4, title: 'Receive Refund', desc: 'Refund will be processed within 14 business days to original payment method' },

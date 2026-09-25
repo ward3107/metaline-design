@@ -3,7 +3,7 @@
 // banner and console warnings can detect them anywhere they leak through.
 
 export const PLACEHOLDER_PHONE = '*5555';
-export const PLACEHOLDER_EMAIL = 'info@anton-aluminum.com';
+export const PLACEHOLDER_EMAIL = 'info@metaline.com';
 export const PLACEHOLDER_WHATSAPP = '972555555555';
 
 export const PLACEHOLDER_IMAGE_HOSTS = ['picsum.photos', 'images.unsplash.com'];

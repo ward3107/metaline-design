@@ -37,7 +37,7 @@ export const UtilityBar = () => {
         <div className="flex items-center gap-3">
           <Link
             to="/contact"
-            className="rounded-full bg-accent-hover hover:bg-blue-700 text-white font-semibold px-4 py-1"
+            className="rounded-full bg-accent hover:bg-accent-hover text-white font-semibold px-4 py-1"
           >
             {u.getQuote}
           </Link>

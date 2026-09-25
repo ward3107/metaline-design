@@ -2,7 +2,7 @@
 
 ## 1. Acceptance of Terms
 
-By accessing and using Anton Aluminum Design services, you accept and agree to be bound by the terms and provisions of this agreement.
+By accessing and using Metaline Aluminum Design services, you accept and agree to be bound by the terms and provisions of this agreement.
 
 ## 2. Services
 
