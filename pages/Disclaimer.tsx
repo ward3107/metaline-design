@@ -330,7 +330,7 @@ export const Disclaimer: React.FC = () => {
   return (
     <div className="min-h-screen bg-gray-50 dark:bg-slate-900 pb-20">
       {/* Header */}
-      <div className="bg-gradient-to-br from-amber-600 to-amber-700 text-white py-12 md:py-20 mb-8 md:mb-12">
+      <div className="bg-primary dark:bg-black text-white py-12 md:py-20 mb-8 md:mb-12">
         <div className="container mx-auto px-4 text-center">
           <Reveal>
             <div className="flex justify-center mb-4">
@@ -425,16 +425,16 @@ export const Disclaimer: React.FC = () => {
           {/* Section 5: AI Content */}
           {siteContent.aiGenerated && (
             <Reveal>
-              <section className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800/30 rounded-2xl p-6 md:p-10 mb-6">
+              <section className="bg-accent/5 dark:bg-accent/10 border border-accent/20 dark:border-accent/30 rounded-2xl p-6 md:p-10 mb-6">
                 <div className="flex items-center gap-3 mb-4">
-                  <Bot size={24} className="text-blue-600" />
+                  <Bot size={24} className="text-accent" />
                   <h2 className="text-2xl font-bold text-gray-900 dark:text-white">{t.s5.title}</h2>
                 </div>
                 <p className="text-gray-600 dark:text-gray-300 mb-4">{t.s5.intro}</p>
                 <ul className="space-y-3">
                   {t.s5.items.map((item, i) => (
                     <li key={i} className="flex items-start gap-3 bg-white dark:bg-slate-800 p-4 rounded-lg">
-                      <Bot size={18} className="text-blue-500 shrink-0 mt-0.5" />
+                      <Bot size={18} className="text-accent shrink-0 mt-0.5" />
                       <span className="text-gray-600 dark:text-gray-300">{item}</span>
                     </li>
                   ))}

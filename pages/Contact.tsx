@@ -218,7 +218,7 @@ export const Contact: React.FC = () => {
                   className={`w-full py-4 rounded-lg font-bold text-lg flex items-center justify-center gap-2 transition-all ${
                     submitted
                     ? 'bg-green-600 text-white cursor-default'
-                    : 'bg-accent hover:bg-accent-hover text-white shadow-lg hover:shadow-xl'
+                    : 'bg-gold hover:bg-gold-hover text-accent shadow-lg hover:shadow-xl'
                   }`}
                 >
                   {submitted ? (

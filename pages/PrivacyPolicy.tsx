@@ -270,7 +270,7 @@ export const PrivacyPolicy: React.FC = () => {
                     </ul>
                   </div>
 
-                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4 border-l-4 border-accent">
+                  <p className="text-gray-700 dark:text-gray-300 leading-relaxed bg-accent/5 dark:bg-accent/10 rounded-lg p-4 border-l-4 border-accent">
                     {t.sections.intro.legalBasis}
                   </p>
                 </section>
@@ -360,7 +360,7 @@ export const PrivacyPolicy: React.FC = () => {
                         <span
                           className={`shrink-0 px-3 py-1 rounded-full text-xs font-medium ${
                             item.basisType === 'consent'
-                              ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300'
+                              ? 'bg-accent/10 dark:bg-accent/20 text-accent dark:text-sky'
                               : 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300'
                           }`}
                         >
@@ -590,8 +590,8 @@ export const PrivacyPolicy: React.FC = () => {
                     ))}
                   </ul>
 
-                  <div className="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4 border border-blue-200 dark:border-blue-800">
-                    <p className="text-blue-800 dark:text-blue-200">
+                  <div className="bg-accent/5 dark:bg-accent/10 rounded-lg p-4 border border-accent/20 dark:border-accent/30">
+                    <p className="text-ink-800 dark:text-ink-200">
                       <strong>{t.sections.security.breachProcedure}</strong>
                     </p>
                   </div>

@@ -364,8 +364,8 @@ export const RefundPolicy: React.FC = () => {
                   </div>
                 ))}
               </div>
-              <div className="flex items-center gap-3 bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
-                <CreditCard size={20} className="text-blue-500" />
+              <div className="flex items-center gap-3 bg-accent/5 dark:bg-accent/10 p-4 rounded-lg">
+                <CreditCard size={20} className="text-accent" />
                 <span className="text-gray-700 dark:text-gray-300 font-medium">{t.s4.method}</span>
               </div>
             </section>
