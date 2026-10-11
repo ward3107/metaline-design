@@ -1,3 +1,4 @@
+import VasiaSignature from './VasiaSignature';
 import { Link } from 'react-router-dom';
 import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone, Clock } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
@@ -109,6 +110,7 @@ export const Footer: React.FC = () => {
           <p>{f.credits}</p>
         </div>
       </div>
+      <VasiaSignature />
     </footer>
   );
 };
